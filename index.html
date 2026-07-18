@@ -204,7 +204,7 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
     </div>
     <figure class="hero-fig">
       <img src="assets/generated/q_evac_gpt.jpg" alt="Family waiting calmly at their SUV tailgate under wildfire smoke, SatPack Go case deployed flat on the gravel, connected">
-      <figcaption class="figcap"><b>Fig. 01</b> — Highway pullout under wildfire smoke. Case deployed flat, label to the sky; family online from the tailgate.</figcaption>
+      <figcaption class="figcap"><b>Fig. 01</b> — The cell network is gone. They're not: checking the fire map, telling family they're safe — three minutes after pulling over.</figcaption>
     </figure>
   </div>
 </div>
@@ -246,8 +246,8 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
         <li><span class="gi">2.5</span><div><h4>Grows with the job</h4><p>Add solar and stay online for weeks (Solar edition) · long-range Wi-Fi to cover a film set or work camp (quote builds).</p></div></li>
       </ul>
       <figure>
-        <img src="assets/photos/IMG_5188.png" alt="SatPack Go case, three-quarter view showing the sealed side control panel" style="background:#fff;padding:24px">
-        <figcaption class="figcap"><b>Fig. 02</b> — Production unit, three-quarter view. Power switch, battery display, and charge port are on the sealed side panel.</figcaption>
+        <img src="assets/photos/real_34side.png" alt="SatPack Go production unit showing the sealed side control panel: power switch, battery display, DC charge input" style="background:#fff;padding:24px">
+        <figcaption class="figcap"><b>Fig. 02</b> — Everything you touch lives on the outside: power, battery readout, charging. That's why the case never opens in the field — and why weather never matters.</figcaption>
       </figure>
     </div>
   </div>
@@ -261,23 +261,19 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
       <div>
         <p style="color:var(--ink-2);max-width:480px;margin-bottom:10px">The worst moment to guess your remaining power is the moment it matters. SatPack Go doesn't make you guess.</p>
         <ul class="tele-list">
-          <li>Glance at the side panel: battery % and hours remaining, live — plan the night instead of hoping</li>
-          <li>It counts every milliamp in and out (a true hardware fuel gauge, not a voltage guess)</li>
-          <li>Charging or full? The display says so — the case stays shut</li>
-          <li>Cools itself when it's working hard; between uses it sleeps for months and stays ready</li>
+          <li>Battery % and hours remaining, live — decide who calls whom while you still have runway (a true hardware fuel gauge, not a voltage guess)</li>
+          <li>Charging or full? One glance says so — the case stays shut</li>
+          <li>Watches its own temperature, cools itself when working hard, and sleeps for months between uses</li>
         </ul>
       </div>
       <figure class="oled-fig">
-        <div class="oled">
+        <div class="oled" style="max-width:250px">
           <div class="chg">⚡ CHARGING</div>
-          <div class="big" id="socNum">87<span style="font-size:32px">%</span></div>
+          <div class="big" id="socNum">87<span style="font-size:26px">%</span></div>
           <div class="cap">Battery Level</div>
-          <div class="row2">
-            <div><div class="k">Time Remaining</div><div class="v">11.5 h</div></div>
-            <div><div class="k">Status</div><div class="v" style="color:#7ce0a3">NOMINAL</div></div>
-          </div>
+          <div class="row2"><div><div class="k" id="cycK">Time Remaining</div><div class="v" id="cycV">11.5 h</div></div></div>
         </div>
-        <figcaption class="figcap"><b>Fig. 03</b> — Built-in power display (actual interface). Percentage and hours-remaining update live.</figcaption>
+        <figcaption class="figcap" style="max-width:250px"><b>Fig. 03</b> — The side-panel display, shown ~2× actual size (the real screen is under an inch across). It tells you the two things that matter: charging state and battery level — and cycles between time remaining and inside temperature.</figcaption>
       </figure>
     </div>
   </div>
@@ -356,23 +352,23 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
     <div class="gal">
       <figure class="wide">
         <img src="assets/generated/q2_storm.jpg" alt="SatPack Go deployed on a tailgate above a valley during a night storm" loading="lazy">
-        <figcaption class="figcap"><b>Fig. 06a</b> — Storm front, valley outage. Deployed on the tailgate, sealed against the rain.</figcaption>
+        <figcaption class="figcap"><b>Fig. 06a</b> — When the valley goes dark, the tailgate becomes the only connected place for 40 km.</figcaption>
       </figure>
       <figure>
         <img src="assets/generated/q_rain2.jpg" alt="Rain striking the sealed SatPack Go case deployed flat on wet gravel" loading="lazy">
-        <figcaption class="figcap"><b>Fig. 06b</b> — Raining on it while it works.</figcaption>
+        <figcaption class="figcap"><b>Fig. 06b</b> — Weather isn't part of the decision. Deploy in whatever's falling.</figcaption>
       </figure>
       <figure>
         <img src="assets/generated/q_flatdeploy_gpt.jpg" alt="SatPack Go deployed flat on prairie gravel, video call running on a phone beside it" loading="lazy">
-        <figcaption class="figcap"><b>Fig. 06c</b> — Deployed: flat, label to the sky.</figcaption>
+        <figcaption class="figcap"><b>Fig. 06c</b> — The whole skill: put it down, walk away, make your call.</figcaption>
       </figure>
       <figure>
         <img src="assets/generated/am_tailgate.jpg" alt="SatPack Go deployed flat on a dusty pickup tailgate on a gravel road" loading="lazy">
-        <figcaption class="figcap"><b>Fig. 06d</b> — Field snap, midday.</figcaption>
+        <figcaption class="figcap"><b>Fig. 06d</b> — No bars on the road means a three-minute wait, not a drive to town.</figcaption>
       </figure>
       <figure class="wide">
         <img src="assets/generated/am_lawn.jpg" alt="SatPack Go deployed flat on a backyard lawn on an overcast day" loading="lazy">
-        <figcaption class="figcap"><b>Fig. 06e</b> — Backyard test run before storm season.</figcaption>
+        <figcaption class="figcap"><b>Fig. 06e</b> — Practice on a boring Sunday, so it's boring when it's urgent.</figcaption>
       </figure>
     </div>
   </div>
@@ -407,12 +403,14 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
 </footer>
 
 <script>
-// subtle live readout — the only motion on the page
-const soc = document.getElementById('socNum');
-if (soc) setInterval(() => {
-  const n = 86 + Math.round(Math.random() * 2);
-  soc.innerHTML = n + '<span style="font-size:32px">%</span>';
-}, 5000);
+// subtle live readout — the only motion on the page (cycles like the real display)
+const cycK = document.getElementById('cycK'), cycV = document.getElementById('cycV');
+let flip = false;
+if (cycK) setInterval(() => {
+  flip = !flip;
+  cycK.textContent = flip ? 'Inside Temp' : 'Time Remaining';
+  cycV.textContent = flip ? '21 \u00B0C' : '11.5 h';
+}, 3000);
 </script>
 </body>
 </html>
