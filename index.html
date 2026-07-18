@@ -279,6 +279,16 @@ nav ul a:hover{color:var(--org)}
 .gal .wide{grid-column:span 2}
 @media(max-width:820px){.gal{grid-template-columns:1fr}.gal .wide{grid-column:span 1}}
 
+/* ---------- use cases ---------- */
+.uses{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:52px}
+@media(max-width:900px){.uses{grid-template-columns:repeat(2,1fr)}}
+.use{position:relative;border:1px solid var(--line);overflow:hidden;aspect-ratio:4/5;display:block}
+.use img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.72);transition:transform .6s cubic-bezier(.2,.6,.2,1),filter .5s}
+.use:hover img{transform:scale(1.05);filter:brightness(.9)}
+.use .ucap{position:absolute;left:0;right:0;bottom:0;padding:60px 18px 18px;background:linear-gradient(to top,rgba(7,8,10,.92),transparent)}
+.use h3{font-family:var(--disp);font-weight:600;font-size:18px;margin-bottom:5px}
+.use p{font-size:12.5px;color:var(--txt-2);line-height:1.45}
+
 /* ---------- CTA ---------- */
 .cta{
   text-align:center;background:
@@ -306,22 +316,22 @@ footer{border-top:1px solid var(--line);padding:38px 0;background:var(--bg)}
     <li><a href="#editions">Editions</a></li>
     <li><a href="#field">Field</a></li>
   </ul>
-  <a class="nav-cta" href="#order">Request a Build</a>
+  <a class="nav-cta" href="#order">Order / Quote</a>
 </nav>
 
 <!-- ================= HERO ================= -->
 <header class="hero" id="top">
   <div class="hero-media" id="heroMedia">
-    <img src="assets/generated/hero_test_v3_mountain.jpg" alt="SatPack Go case on a mountain ledge under the Milky Way">
+    <img src="assets/generated/point_evac.jpg" alt="Family at a highway pullout at dusk, SatPack Go case deployed on the ground, smoke haze on the horizon">
   </div>
   <span class="tick tl"></span><span class="tick tr"></span>
   <span class="tick bl"></span><span class="tick br"></span>
   <div class="wrap hero-inner">
-    <span class="tag">Vault Edition · Emergency-Ready</span>
-    <h1>INTERNET,<br>FROM <span class="org">ANYWHERE</span><br>ON EARTH.</h1>
-    <p class="lede">SatPack Go is a self-contained satellite internet system in a weather-sealed hard case. Set it on the ground under open sky, flip one switch, and you're online — you never even open the case.</p>
+    <span class="tag">Emergency Internet Kit · Built in Calgary</span>
+    <h1>WHEN THE GRID<br>GOES DOWN,<br><span class="org">SET THIS DOWN.</span></h1>
+    <p class="lede">Cell towers fail exactly when you need them most. SatPack Go is a complete satellite internet system in one sealed case — set it on the ground facing the sky, flip one switch, and your whole family or crew is online. You never even open it.</p>
     <div class="hero-ctas">
-      <a class="btn btn-solid" href="#order">Request a Build</a>
+      <a class="btn btn-solid" href="#order">Order / Request a Quote</a>
       <a class="btn btn-line" href="#deploy">How It Deploys</a>
     </div>
     <div class="hud">
@@ -368,6 +378,20 @@ footer{border-top:1px solid var(--line);padding:38px 0;background:var(--bg)}
   </div>
 </section>
 
+<!-- ================= USE CASES ================= -->
+<section id="uses" class="rule">
+  <div class="wrap">
+    <span class="tag rv">Who Runs One</span>
+    <h2 class="rv">One case.<br><span class="dim">Four jobs.</span></h2>
+    <div class="uses rv">
+      <div class="use"><img src="assets/generated/point_blackout.jpg" alt="Neighbourhood blackout, one connected household" loading="lazy"><div class="ucap"><h3>Emergency &amp; Home Backup</h3><p>Outages, evacuations, storm season. The case in the closet that keeps your family connected when the towers aren't.</p></div></div>
+      <div class="use"><img src="assets/generated/point_filmset.jpg" alt="SatPack Go beside a cinema camera on a remote set" loading="lazy"><div class="ucap"><h3>Productions &amp; Rentals</h3><p>Remote sets and events. Proven on working productions — buy, or rent by the week. Long-range Wi-Fi option for big sites.</p></div></div>
+      <div class="use"><img src="assets/generated/scene_worksite.jpg" alt="SatPack Go at a forestry work site" loading="lazy"><div class="ucap"><h3>Field Operations</h3><p>Forestry, construction, energy. Timesheets, safety check-ins, and video calls at sites with zero bars.</p></div></div>
+      <div class="use"><img src="assets/generated/scene_winter.jpg" alt="SatPack Go in winter at a remote treeline" loading="lazy"><div class="ucap"><h3>Acreage &amp; Cabin</h3><p>Internet where the line never reached — and a lifeline when the road's snowed in. Solar edition runs indefinitely.</p></div></div>
+    </div>
+  </div>
+</section>
+
 <!-- ================= INSIDE ================= -->
 <section id="inside" class="rule">
   <div class="wrap split">
@@ -379,11 +403,11 @@ footer{border-top:1px solid var(--line);padding:38px 0;background:var(--bg)}
       <span class="tag rv">Inside the Case</span>
       <h2 class="rv">Everything it needs,<br><span class="dim">nothing it doesn't.</span></h2>
       <ul class="kit-list">
-        <li class="rv"><span class="idx">/01</span><div><h4>Starlink Mini Terminal</h4><p>Low-Earth-orbit satellite internet — high speed, low latency, global coverage under open sky.</p></div></li>
-        <li class="rv"><span class="idx">/02</span><div><h4>Enterprise Wi-Fi Access Point</h4><p>Ubiquiti access point broadcasts a fast, reliable local network for all your devices.</p></div></li>
-        <li class="rv"><span class="idx">/03</span><div><h4>30 Ah LiFePO₄ Battery</h4><p>Safe-chemistry lithium power sized for a full day of continuous satellite uplink.</p></div></li>
-        <li class="rv"><span class="idx">/04</span><div><h4>Custom Power Management</h4><p>Purpose-built monitoring board with hardware coulomb counting, live OLED readout, and automatic thermal control.</p></div></li>
-        <li class="rv"><span class="idx">/05</span><div><h4>Weather-Sealed Hard Case</h4><p>Rugged latched enclosure with sealed external controls, vents, and charge inputs — built for the back of the truck, not the shelf.</p></div></li>
+        <li class="rv"><span class="idx">/01</span><div><h4>Starlink Mini Terminal — Wi-Fi Built In</h4><p>Low-Earth-orbit satellite internet with onboard Wi-Fi — your whole family or crew connects, no extra gear.</p></div></li>
+        <li class="rv"><span class="idx">/02</span><div><h4>30 Ah LiFePO₄ Battery</h4><p>Safe-chemistry lithium power sized for a full day of continuous satellite uplink.</p></div></li>
+        <li class="rv"><span class="idx">/03</span><div><h4>Custom Power Management</h4><p>Purpose-built monitoring board with hardware coulomb counting, live OLED readout, and automatic thermal control.</p></div></li>
+        <li class="rv"><span class="idx">/04</span><div><h4>Weather-Sealed Hard Case</h4><p>Rugged latched enclosure with sealed external controls, vents, and charge inputs — built for the back of the truck, not the shelf.</p></div></li>
+        <li class="rv"><span class="idx">/05</span><div><h4>Options</h4><p>Solar charging with MPPT controller (Solar edition) · long-range Wi-Fi access point for productions and large sites (quote builds).</p></div></li>
       </ul>
     </div>
   </div>
@@ -430,7 +454,7 @@ footer{border-top:1px solid var(--line);padding:38px 0;background:var(--bg)}
         <p class="sub">The core kit. Charge it at home or from a generator, deploy it anywhere.</p>
         <ul>
           <li class="on">Starlink Mini satellite internet</li>
-          <li class="on">Onboard Wi-Fi access point</li>
+          <li class="on">Wi-Fi onboard — no extra gear needed</li>
           <li class="on">30 Ah LiFePO₄ battery — all-day runtime</li>
           <li class="on">Live power telemetry &amp; OLED display</li>
           <li class="on">AC fast charging</li>
@@ -445,7 +469,7 @@ footer{border-top:1px solid var(--line);padding:38px 0;background:var(--bg)}
         <p class="sub">Everything in the base kit, plus solar charging for indefinite off-grid operation.</p>
         <ul>
           <li class="on">Starlink Mini satellite internet</li>
-          <li class="on">Onboard Wi-Fi access point</li>
+          <li class="on">Wi-Fi onboard — no extra gear needed</li>
           <li class="on">30 Ah LiFePO₄ battery — all-day runtime</li>
           <li class="on">Live power telemetry &amp; OLED display</li>
           <li class="on">AC fast charging</li>
@@ -463,11 +487,11 @@ footer{border-top:1px solid var(--line);padding:38px 0;background:var(--bg)}
     <span class="tag rv">In the Field</span>
     <h2 class="rv">Built for the places<br><span class="dim">the grid forgot.</span></h2>
     <div class="gal rv">
-      <a class="wide" href="assets/generated/hero_test_v3_mountain.jpg" data-cap="Backcountry / Night Ops"><img src="assets/generated/hero_test_v3_mountain.jpg" alt="SatPack Go on a cliff edge at night" loading="lazy"></a>
-      <a href="assets/generated/kling_20260719_IMAGE_This_is_a__965_2.jpg" data-cap="Base Camp / Off-Grid"><img src="assets/generated/kling_20260719_IMAGE_This_is_a__965_2.jpg" alt="SatPack Go at a campsite at sunset" loading="lazy"></a>
-      <a href="assets/generated/kling_20260719_IMAGE_This_is_a__826_1.jpg" data-cap="Summit / Milky Way"><img src="assets/generated/kling_20260719_IMAGE_This_is_a__826_1.jpg" alt="SatPack Go on a mountain summit under the Milky Way" loading="lazy"></a>
-      <a href="assets/generated/kling_20260719_IMAGE_This_is_a__905_5.jpg" data-cap="Field Deployment"><img src="assets/generated/kling_20260719_IMAGE_This_is_a__905_5.jpg" alt="SatPack Go field deployment" loading="lazy"></a>
-      <a class="wide" href="assets/generated/kling_20260719_IMAGE_This_is_a__913_3.jpg" data-cap="Remote Operations"><img src="assets/generated/kling_20260719_IMAGE_This_is_a__913_3.jpg" alt="SatPack Go in remote terrain" loading="lazy"></a>
+      <a class="wide" href="assets/generated/scene_storm.jpg" data-cap="Outage / Storm Front"><img src="assets/generated/scene_storm.jpg" alt="SatPack Go on a truck tailgate above a blacked-out town under a storm front" loading="lazy"></a>
+      <a href="assets/generated/point_rainseal.jpg" data-cap="Sealed / Working in Rain"><img src="assets/generated/point_rainseal.jpg" alt="Rain pouring off the sealed SatPack Go case while it works" loading="lazy"></a>
+      <a href="assets/generated/kling_20260719_IMAGE_This_is_a__826_1.jpg" data-cap="Backcountry / Night Ops"><img src="assets/generated/kling_20260719_IMAGE_This_is_a__826_1.jpg" alt="SatPack Go on a mountain summit under the Milky Way" loading="lazy"></a>
+      <a href="assets/generated/point_hands.jpg" data-cap="Deployment / Set It Down"><img src="assets/generated/point_hands.jpg" alt="Gloved hands setting the closed SatPack Go case down flat" loading="lazy"></a>
+      <a class="wide" href="assets/generated/hero_test_v3_mountain.jpg" data-cap="Remote Operations"><img src="assets/generated/hero_test_v3_mountain.jpg" alt="SatPack Go on a cliff edge at night" loading="lazy"></a>
     </div>
   </div>
 </section>
@@ -477,7 +501,7 @@ footer{border-top:1px solid var(--line);padding:38px 0;background:var(--bg)}
   <div class="wrap">
     <span class="tag rv" style="justify-content:center">Availability</span>
     <h2 class="rv">Ready before<br>you need it.</h2>
-    <p class="rv">Built to order in Calgary, Alberta. SatPack Go from <b style="color:var(--org)">$2,495 CAD</b> · Solar edition <b style="color:var(--org)">$2,995 CAD</b> — Starlink Mini included, activate on your own plan (pause it when you don't need it). Multi-unit pricing for departments and fleets.</p>
+    <p class="rv">Built to order in Calgary, Alberta. SatPack Go from <b style="color:var(--org)">$2,495 CAD</b> · Solar edition <b style="color:var(--org)">$2,995 CAD</b> — Starlink Mini included, activate on your own plan (pause it when you don't need it). Multi-unit pricing for departments and fleets · production/crew builds with long-range Wi-Fi · <b style="color:var(--txt)">rentals available</b> for productions and events.</p>
     <a class="btn btn-solid rv" href="mailto:hello@satpackgo.com?subject=SatPack%20Go%20—%20Order%20Inquiry">Order / Ask a Question</a>
   </div>
 </section>
@@ -498,22 +522,13 @@ const io = new IntersectionObserver(es => es.forEach(e => {
 document.querySelectorAll('.rv').forEach(el => io.observe(el));
 
 // stagger siblings inside grids/lists
-document.querySelectorAll('.steps,.kit-list,.editions,.gal,.tele-feats').forEach(group => {
+document.querySelectorAll('.steps,.kit-list,.editions,.gal,.tele-feats,.uses').forEach(group => {
   [...group.children].forEach((c, i) => c.style.transitionDelay = (i * 90) + 'ms');
 });
 
-// swap hero image for video when/if the loop exists
-(function () {
-  const src = 'assets/video/hero_loop.mp4';
-  fetch(src, { method: 'HEAD' }).then(r => {
-    if (!r.ok) return;
-    const v = document.createElement('video');
-    v.src = src; v.muted = true; v.loop = true; v.autoplay = true; v.playsInline = true;
-    v.poster = 'assets/generated/hero_test_v3_mountain.jpg';
-    const media = document.getElementById('heroMedia');
-    v.addEventListener('canplay', () => { media.replaceChildren(v); v.play().catch(()=>{}); }, { once: true });
-  }).catch(() => {});
-})();
+// hero video swap disabled — the mountain loop no longer matches the
+// failure-first hero; re-enable when an evac/blackout loop is generated.
+// (loop file kept at assets/video/hero_loop.mp4)
 
 // tiny OLED SOC flicker for life
 const soc = document.getElementById('socNum');
