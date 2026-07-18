@@ -7,532 +7,412 @@
 <meta name="description" content="SatPack Go turns any patch of open sky into working internet for your whole family or crew. Set the sealed case down, flip one switch — online in minutes, anywhere.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#07080a;
-  --bg-2:#0c0e12;
-  --bg-3:#12151b;
-  --line:#1d2129;
-  --line-2:#2a2f3a;
-  --txt:#e8e6e1;
-  --txt-2:#9aa0ab;
-  --txt-3:#5c626e;
-  --org:#f7941d;
-  --org-2:#ffb347;
-  --org-dim:rgba(247,148,29,.12);
-  --grn:#57d98a;
-  --mono:'IBM Plex Mono',monospace;
+  --paper:#fafaf7;
+  --card:#ffffff;
+  --ink:#16181b;
+  --ink-2:#565b63;
+  --ink-3:#9298a1;
+  --rule:#e2e0da;
+  --rule-2:#c9c6bf;
+  --org:#e8720c;
+  --org-ink:#c25e07;
+  --display:#0b0d10;
   --sans:'IBM Plex Sans',sans-serif;
-  --disp:'Chakra Petch',sans-serif;
+  --mono:'IBM Plex Mono',monospace;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{
-  background:var(--bg);color:var(--txt);
-  font-family:var(--sans);font-weight:300;
-  line-height:1.6;overflow-x:hidden;
-}
-::selection{background:var(--org);color:#000}
-
-/* ---------- grain overlay ---------- */
-body::after{
-  content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.05;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/* ---------- shared ---------- */
-.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:400;line-height:1.65;font-size:16px}
+::selection{background:var(--org);color:#fff}
+img{max-width:100%;display:block}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
 .mono{font-family:var(--mono)}
-.tag{
-  font-family:var(--mono);font-size:11px;letter-spacing:.25em;
-  text-transform:uppercase;color:var(--org);
-  display:inline-flex;align-items:center;gap:10px;
-}
-.tag::before{content:"";width:24px;height:1px;background:var(--org)}
-h2{
-  font-family:var(--disp);font-weight:600;font-size:clamp(28px,4.4vw,46px);
-  line-height:1.12;letter-spacing:.01em;margin:14px 0 18px;
-}
-h2 .dim{color:var(--txt-3)}
-section{position:relative;padding:110px 0}
-.rule{border-top:1px solid var(--line)}
 
-/* reveal-on-scroll */
-.rv{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.6,.2,1),transform .7s cubic-bezier(.2,.6,.2,1)}
-.rv.in{opacity:1;transform:none}
+/* ---------- section scaffold: numbered, ruled, documentary ---------- */
+section{padding:72px 0}
+.sec-head{display:flex;align-items:baseline;gap:18px;border-top:2px solid var(--ink);padding-top:14px;margin-bottom:40px}
+.sec-num{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--org-ink);letter-spacing:.08em}
+.sec-head h2{font-size:clamp(24px,3.4vw,34px);font-weight:700;letter-spacing:-.015em;line-height:1.15}
+.sec-head .sub{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase}
+@media(max-width:700px){.sec-head{flex-wrap:wrap}.sec-head .sub{display:none}}
 
-/* ---------- nav ---------- */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 28px;height:64px;
-  background:linear-gradient(to bottom,rgba(7,8,10,.92),rgba(7,8,10,.75));
-  backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06);
-}
-.logo{font-family:var(--disp);font-weight:700;font-size:19px;letter-spacing:.14em;text-decoration:none;color:var(--txt)}
-.logo b{color:var(--org);font-weight:700}
-.logo .dot{color:var(--org)}
-nav ul{display:flex;gap:34px;list-style:none}
-nav ul a{
-  font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--txt-2);text-decoration:none;transition:color .2s;
-}
-nav ul a:hover{color:var(--org)}
-.nav-cta{
-  font-family:var(--mono);font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;
-  color:#000;background:var(--org);padding:9px 18px;text-decoration:none;
-  transition:background .2s;
-}
-.nav-cta:hover{background:var(--org-2)}
-@media(max-width:820px){nav ul{display:none}}
+.figcap{font-family:var(--mono);font-size:12px;color:var(--ink-2);padding:10px 2px 0;letter-spacing:.02em}
+.figcap b{color:var(--org-ink);font-weight:600}
+figure{margin:0}
+figure img{border:1px solid var(--rule-2)}
 
-/* ---------- hero ---------- */
-.hero{
-  position:relative;min-height:100svh;display:flex;align-items:flex-end;
-  padding:0 0 8vh;overflow:hidden;
+/* ---------- header ---------- */
+header.top{
+  position:sticky;top:0;z-index:50;background:rgba(250,250,247,.95);backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--rule);
 }
-.hero-media{position:absolute;inset:0;z-index:0}
-.hero-media img,.hero-media video{
-  width:100%;height:100%;object-fit:cover;display:block;
-  animation:heroDrift 26s ease-in-out infinite alternate;
-}
-@keyframes heroDrift{from{transform:scale(1.02) translateY(0)}to{transform:scale(1.09) translateY(-1.4%)}}
-.hero-media::after{
-  content:"";position:absolute;inset:0;
-  background:
-    linear-gradient(to top,rgba(7,8,10,.96) 0%,rgba(7,8,10,.45) 34%,rgba(7,8,10,.12) 60%,rgba(7,8,10,.35) 100%);
-}
-.hero-inner{position:relative;z-index:2;width:100%}
-.hero .tag{animation:fadeUp .8s .15s both}
-.hero h1{
-  font-family:var(--disp);font-weight:700;
-  font-size:clamp(44px,8.5vw,104px);
-  line-height:.98;letter-spacing:.005em;margin:18px 0 22px;
-  animation:fadeUp .8s .3s both;
-}
-.hero h1 .org{color:var(--org)}
-.hero p.lede{
-  max-width:520px;font-size:17px;color:var(--txt-2);
-  animation:fadeUp .8s .45s both;
-}
-.hero-ctas{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;animation:fadeUp .8s .6s both}
+.topbar{display:flex;align-items:center;gap:28px;height:60px}
+.logo{font-weight:700;font-size:17px;letter-spacing:.06em;color:var(--ink);text-decoration:none}
+.logo span{color:var(--org)}
+.topbar nav{display:flex;gap:22px;margin-left:auto}
+.topbar nav a{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);text-decoration:none;letter-spacing:.04em}
+.topbar nav a:hover{color:var(--org-ink)}
 .btn{
-  font-family:var(--mono);font-size:12.5px;letter-spacing:.15em;text-transform:uppercase;
-  padding:15px 28px;text-decoration:none;transition:.2s;
+  display:inline-block;font-family:var(--mono);font-size:13px;font-weight:600;letter-spacing:.04em;
+  padding:11px 20px;text-decoration:none;border:1.5px solid var(--ink);color:var(--ink);
+  background:transparent;transition:background .15s,color .15s;
 }
-.btn-solid{background:var(--org);color:#000}
-.btn-solid:hover{background:var(--org-2);transform:translateY(-2px)}
-.btn-line{border:1px solid var(--line-2);color:var(--txt)}
-.btn-line:hover{border-color:var(--org);color:var(--org)}
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.btn:hover{background:var(--ink);color:#fff}
+.btn.solid{background:var(--org);border-color:var(--org);color:#fff}
+.btn.solid:hover{background:var(--org-ink);border-color:var(--org-ink)}
+@media(max-width:820px){.topbar nav{display:none}}
 
-/* hero HUD strip */
-.hud{
-  display:flex;gap:0;margin-top:52px;border:1px solid rgba(255,255,255,.1);
-  background:rgba(7,8,10,.55);backdrop-filter:blur(8px);
-  animation:fadeUp .8s .75s both;max-width:760px;
+/* ---------- masthead ---------- */
+.mast{padding:64px 0 56px;border-bottom:1px solid var(--rule)}
+.kicker{font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--org-ink);font-weight:600}
+.mast h1{
+  font-size:clamp(38px,6.2vw,68px);font-weight:700;letter-spacing:-.025em;line-height:1.04;
+  margin:16px 0 20px;color:var(--display);max-width:760px;
 }
-.hud div{flex:1;padding:14px 18px;border-right:1px solid rgba(255,255,255,.08)}
-.hud div:last-child{border-right:none}
-.hud .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--txt-3)}
-.hud .v{font-family:var(--disp);font-weight:600;font-size:19px;margin-top:3px}
-.hud .v em{font-style:normal;color:var(--org);font-size:12px;font-family:var(--mono)}
-@media(max-width:640px){.hud{flex-wrap:wrap}.hud div{flex:1 1 50%;border-bottom:1px solid rgba(255,255,255,.08)}}
+.mast .lede{font-size:18px;font-weight:300;color:var(--ink-2);max-width:600px;line-height:1.6}
+.mast .lede b{font-weight:500;color:var(--ink)}
+.mast-ctas{display:flex;gap:12px;margin:30px 0 0;flex-wrap:wrap}
 
-/* corner ticks on hero */
-.tick{position:absolute;width:18px;height:18px;z-index:3;opacity:.6}
-.tick::before,.tick::after{content:"";position:absolute;background:var(--org)}
-.tick::before{width:100%;height:1px}
-.tick::after{width:1px;height:100%}
-.tick.tl{top:84px;left:24px}
-.tick.tr{top:84px;right:24px;transform:scaleX(-1)}
-.tick.bl{bottom:24px;left:24px;transform:scaleY(-1)}
-.tick.br{bottom:24px;right:24px;transform:scale(-1)}
+/* key-facts row: datasheet style */
+.facts{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--rule-2);margin-top:44px;background:var(--card)}
+.facts div{padding:16px 18px;border-right:1px solid var(--rule)}
+.facts div:last-child{border-right:none}
+.facts .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.facts .v{font-size:19px;font-weight:600;margin-top:2px;letter-spacing:-.01em}
+@media(max-width:700px){.facts{grid-template-columns:1fr 1fr}.facts div{border-bottom:1px solid var(--rule)}}
 
-/* ---------- marquee ---------- */
-.marquee{
-  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-  overflow:hidden;padding:13px 0;background:var(--bg-2);white-space:nowrap;
-}
-.marquee-track{display:inline-block;animation:scroll 36s linear infinite}
-.marquee span{
-  font-family:var(--mono);font-size:11.5px;letter-spacing:.28em;text-transform:uppercase;
-  color:var(--txt-3);padding:0 34px;
-}
-.marquee span b{color:var(--org);font-weight:400}
-@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.hero-fig{margin-top:44px}
+.hero-fig img{width:100%;border:1px solid var(--rule-2)}
 
 /* ---------- deploy steps ---------- */
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:56px}
-.step{background:var(--bg);padding:38px 30px 42px;position:relative;transition:background .3s}
-.step:hover{background:var(--bg-3)}
-.step .num{
-  font-family:var(--disp);font-weight:700;font-size:60px;line-height:1;
-  color:transparent;-webkit-text-stroke:1px var(--line-2);
-  transition:.3s;
-}
-.step:hover .num{-webkit-text-stroke:1px var(--org);color:var(--org-dim)}
-.step h3{font-family:var(--disp);font-weight:600;font-size:20px;margin:20px 0 10px}
-.step p{color:var(--txt-2);font-size:14.5px}
-.step .lbl{position:absolute;top:16px;right:18px;font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;color:var(--txt-3);text-transform:uppercase}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.step{border-top:1px solid var(--rule-2);padding-top:16px}
+.step .n{font-family:var(--mono);font-weight:600;font-size:13px;color:var(--org-ink)}
+.step h3{font-size:19px;font-weight:600;margin:8px 0 8px;letter-spacing:-.01em}
+.step p{color:var(--ink-2);font-size:15px}
 @media(max-width:820px){.steps{grid-template-columns:1fr}}
 
-/* ---------- inside the case ---------- */
-.split{display:grid;grid-template-columns:1.05fr .95fr;gap:70px;align-items:center}
-@media(max-width:900px){.split{grid-template-columns:1fr;gap:40px}}
-.case-img{
-  position:relative;border:1px solid var(--line);
-  background:radial-gradient(120% 100% at 50% 0%,#151922 0%,var(--bg-2) 70%);
-  padding:34px;
-}
-.case-img img{width:100%;display:block;filter:drop-shadow(0 30px 40px rgba(0,0,0,.55))}
-.case-img .frame-lbl{
-  position:absolute;top:12px;left:14px;
-  font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;color:var(--txt-3);text-transform:uppercase;
-}
-.kit-list{list-style:none;margin-top:34px}
-.kit-list li{
-  display:flex;gap:18px;padding:19px 0;border-bottom:1px solid var(--line);
-}
-.kit-list li:first-child{border-top:1px solid var(--line)}
-.kit-list .idx{
-  font-family:var(--mono);font-size:11px;color:var(--org);min-width:34px;padding-top:3px;
-}
-.kit-list h4{font-family:var(--disp);font-weight:600;font-size:16.5px;margin-bottom:3px}
-.kit-list p{color:var(--txt-2);font-size:14px}
+/* ---------- what you get ---------- */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+@media(max-width:900px){.split{grid-template-columns:1fr}}
+.get-list{list-style:none}
+.get-list li{display:flex;gap:16px;padding:18px 0;border-bottom:1px solid var(--rule)}
+.get-list li:first-child{padding-top:0}
+.get-list .gi{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--org-ink);min-width:30px;padding-top:4px}
+.get-list h4{font-size:16.5px;font-weight:600;margin-bottom:3px;letter-spacing:-.01em}
+.get-list p{color:var(--ink-2);font-size:14.5px}
 
-/* ---------- telemetry / monitor ---------- */
-.telemetry{background:var(--bg-2)}
+/* ---------- readout ---------- */
+.readout{background:var(--card);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.oled-fig{max-width:400px}
 .oled{
-  border:1px solid var(--line-2);background:#04050a;padding:34px 34px 30px;
-  box-shadow:0 0 90px rgba(247,148,29,.05), inset 0 0 60px rgba(0,0,0,.6);
-  max-width:430px;position:relative;
+  background:#0a0c12;border:1px solid var(--rule-2);padding:28px 30px 24px;
 }
-.oled::before{
-  content:"BATTERY MONITOR — LIVE";
-  position:absolute;top:-9px;left:22px;background:var(--bg-2);padding:0 10px;
-  font-family:var(--mono);font-size:9.5px;letter-spacing:.24em;color:var(--txt-3);
-}
-.oled .chg{
-  font-family:var(--mono);font-size:13px;color:#ffd75e;letter-spacing:.1em;
-  display:flex;align-items:center;gap:8px;border-bottom:1px solid #1a1d28;padding-bottom:14px;margin-bottom:18px;
-}
-.oled .bolt{animation:blink 2s steps(1) infinite}
-@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
-.oled .big{
-  font-family:var(--disp);font-weight:700;font-size:74px;line-height:1;
-  color:#8fd4ff;text-shadow:0 0 22px rgba(120,190,255,.35);
-}
-.oled .cap{font-family:var(--mono);font-size:11.5px;letter-spacing:.2em;color:#4d6f8a;text-transform:uppercase;margin-top:8px}
-.oled .row2{display:flex;justify-content:space-between;margin-top:26px;padding-top:16px;border-top:1px solid #1a1d28}
-.oled .row2 .k{font-family:var(--mono);font-size:10px;color:#3d5468;letter-spacing:.18em;text-transform:uppercase}
-.oled .row2 .v{font-family:var(--disp);font-size:22px;font-weight:600;color:#8fd4ff}
-.tele-feats{list-style:none;margin-top:30px}
-.tele-feats li{display:flex;gap:14px;margin-bottom:17px;color:var(--txt-2);font-size:15px}
-.tele-feats li::before{content:"▸";color:var(--org);font-size:13px;padding-top:2px}
+.oled .chg{font-family:var(--mono);font-size:12px;color:#ffd75e;letter-spacing:.08em;border-bottom:1px solid #232634;padding-bottom:12px;margin-bottom:16px}
+.oled .big{font-size:62px;font-weight:700;line-height:1;color:#9fd8ff;font-family:var(--sans);letter-spacing:-.02em}
+.oled .cap{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:#51708a;text-transform:uppercase;margin-top:6px}
+.oled .row2{display:flex;justify-content:space-between;margin-top:22px;padding-top:14px;border-top:1px solid #232634}
+.oled .row2 .k{font-family:var(--mono);font-size:10px;color:#41546a;letter-spacing:.12em;text-transform:uppercase}
+.oled .row2 .v{font-size:19px;font-weight:600;color:#9fd8ff;margin-top:2px}
+.tele-list{list-style:none;margin-top:8px}
+.tele-list li{padding:12px 0 12px 26px;border-bottom:1px solid var(--rule);color:var(--ink-2);font-size:15px;position:relative}
+.tele-list li::before{content:"—";position:absolute;left:0;color:var(--org-ink);font-weight:600}
+
+/* ---------- uses ---------- */
+.uses{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+@media(max-width:900px){.uses{grid-template-columns:1fr 1fr}}
+.use img{aspect-ratio:4/3;object-fit:cover;width:100%;border:1px solid var(--rule-2)}
+.use h3{font-size:16px;font-weight:600;margin:12px 0 4px;letter-spacing:-.01em}
+.use p{font-size:13.5px;color:var(--ink-2);line-height:1.5}
 
 /* ---------- editions ---------- */
-.editions{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:54px}
-@media(max-width:820px){.editions{grid-template-columns:1fr}}
-.ed{
-  border:1px solid var(--line);background:var(--bg-2);padding:40px 36px;position:relative;
-  transition:border-color .3s,transform .3s;
-}
-.ed:hover{transform:translateY(-4px)}
-.ed.base:hover{border-color:var(--line-2)}
-.ed.solar{border-color:rgba(247,148,29,.35)}
-.ed.solar:hover{border-color:var(--org)}
-.ed .ed-tag{
-  font-family:var(--mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;
-  color:var(--txt-3);
-}
-.ed.solar .ed-tag{color:var(--org)}
-.ed h3{font-family:var(--disp);font-weight:700;font-size:27px;margin:10px 0 6px}
-.ed .sub{color:var(--txt-2);font-size:14.5px;min-height:44px}
-.ed ul{list-style:none;margin-top:26px}
-.ed li{
-  padding:11px 0;border-bottom:1px solid var(--line);font-size:14.5px;color:var(--txt-2);
-  display:flex;gap:12px;
-}
-.ed li::before{content:"—";color:var(--txt-3)}
-.ed li.on{color:var(--txt)}
-.ed li.on::before{content:"+";color:var(--org)}
-.ed .ribbon{
-  position:absolute;top:0;right:0;background:var(--org);color:#000;
-  font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;
-  padding:6px 14px;
-}
+.eds{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+@media(max-width:820px){.eds{grid-template-columns:1fr}}
+.ed{border:1px solid var(--rule-2);background:var(--card);padding:30px 30px 26px}
+.ed.solar{border-color:var(--org);border-width:1.5px}
+.ed .et{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.ed.solar .et{color:var(--org-ink)}
+.ed h3{font-size:22px;font-weight:700;margin:8px 0 2px;letter-spacing:-.015em}
+.ed .price{font-family:var(--mono);font-size:15px;font-weight:600;color:var(--ink);margin-bottom:10px}
+.ed .sub{color:var(--ink-2);font-size:14.5px;min-height:44px}
+.ed ul{list-style:none;margin-top:18px}
+.ed li{padding:9px 0 9px 24px;border-bottom:1px solid var(--rule);font-size:14.5px;color:var(--ink-2);position:relative}
+.ed li::before{content:"✓";position:absolute;left:2px;color:var(--org-ink);font-weight:600;font-size:13px}
+.ed li.off{color:var(--ink-3)}
+.ed li.off::before{content:"—";color:var(--ink-3)}
 
-/* ---------- gallery ---------- */
-.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:52px}
-.gal a{display:block;border:1px solid var(--line);overflow:hidden;position:relative;aspect-ratio:16/10}
-.gal img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.6,.2,1),filter .6s}
-.gal a:hover img{transform:scale(1.05);filter:brightness(1.1)}
-.gal a::after{
-  content:attr(data-cap);position:absolute;left:0;right:0;bottom:0;
-  padding:22px 16px 12px;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--txt-2);
-  background:linear-gradient(to top,rgba(7,8,10,.9),transparent);
-  opacity:0;transition:opacity .4s;
-}
-.gal a:hover::after{opacity:1}
+/* ---------- gallery / field ---------- */
+.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:820px){.gal{grid-template-columns:1fr}}
+.gal figure img{aspect-ratio:16/10;object-fit:cover;width:100%}
 .gal .wide{grid-column:span 2}
-@media(max-width:820px){.gal{grid-template-columns:1fr}.gal .wide{grid-column:span 1}}
+@media(max-width:820px){.gal .wide{grid-column:span 1}}
 
-/* ---------- use cases ---------- */
-.uses{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:52px}
-@media(max-width:900px){.uses{grid-template-columns:repeat(2,1fr)}}
-.use{position:relative;border:1px solid var(--line);overflow:hidden;aspect-ratio:4/5;display:block}
-.use img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.72);transition:transform .6s cubic-bezier(.2,.6,.2,1),filter .5s}
-.use:hover img{transform:scale(1.05);filter:brightness(.9)}
-.use .ucap{position:absolute;left:0;right:0;bottom:0;padding:60px 18px 18px;background:linear-gradient(to top,rgba(7,8,10,.92),transparent)}
-.use h3{font-family:var(--disp);font-weight:600;font-size:18px;margin-bottom:5px}
-.use p{font-size:12.5px;color:var(--txt-2);line-height:1.45}
-
-/* ---------- CTA ---------- */
-.cta{
-  text-align:center;background:
-    radial-gradient(60% 90% at 50% 110%,rgba(247,148,29,.13),transparent 70%),
-    var(--bg-2);
-  border-top:1px solid var(--line);
-}
-.cta h2{font-size:clamp(30px,5vw,54px)}
-.cta p{color:var(--txt-2);max-width:460px;margin:0 auto 36px}
+/* ---------- order ---------- */
+.order{background:var(--card);border-top:2px solid var(--ink)}
+.order-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:56px;align-items:start}
+@media(max-width:900px){.order-grid{grid-template-columns:1fr}}
+.order h2{font-size:clamp(26px,3.6vw,38px);font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:8px 0 14px}
+.order p{color:var(--ink-2);max-width:520px}
+.order .price-line{font-family:var(--mono);font-size:14px;margin:18px 0 24px;color:var(--ink)}
+.order .price-line b{color:var(--org-ink)}
+.how{list-style:none;border:1px solid var(--rule-2);background:var(--paper)}
+.how li{display:flex;gap:14px;padding:14px 18px;border-bottom:1px solid var(--rule);font-size:14.5px;color:var(--ink-2)}
+.how li:last-child{border-bottom:none}
+.how .hn{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--org-ink);min-width:22px;padding-top:2px}
+.how b{color:var(--ink);font-weight:600}
 
 /* ---------- footer ---------- */
-footer{border-top:1px solid var(--line);padding:38px 0;background:var(--bg)}
-.foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
-.foot .mono{font-size:10.5px;letter-spacing:.18em;color:var(--txt-3);text-transform:uppercase}
+footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-family:var(--mono);font-size:11.5px;color:var(--ink-3);letter-spacing:.03em}
 </style>
 </head>
 <body>
 
-<nav>
-  <a class="logo" href="#top">SATPACK<span class="dot">·</span>GO</a>
-  <ul>
-    <li><a href="#deploy">Deploy</a></li>
-    <li><a href="#inside">Inside</a></li>
-    <li><a href="#monitor">Monitor</a></li>
-    <li><a href="#editions">Editions</a></li>
-    <li><a href="#field">Field</a></li>
-  </ul>
-  <a class="nav-cta" href="#order">Order / Quote</a>
-</nav>
-
-<!-- ================= HERO ================= -->
-<header class="hero" id="top">
-  <div class="hero-media" id="heroMedia">
-    <img src="assets/generated/q_evac_gpt.jpg" alt="Family waiting calmly at their SUV tailgate under wildfire smoke, SatPack Go case deployed flat on the gravel, connected">
-  </div>
-  <span class="tick tl"></span><span class="tick tr"></span>
-  <span class="tick bl"></span><span class="tick br"></span>
-  <div class="wrap hero-inner">
-    <span class="tag">Emergency Internet Kit · Built in Calgary</span>
-    <h1>WHEN THE GRID<br>GOES DOWN,<br><span class="org">SET THIS DOWN.</span></h1>
-    <p class="lede">Cell towers fail exactly when you need them most. SatPack Go turns any patch of open sky into working internet — video calls, maps, weather, check-ins — for everyone with you. Set the sealed case on the ground, flip one switch, done. You never even open it.</p>
-    <div class="hero-ctas">
-      <a class="btn btn-solid" href="#order">Order / Request a Quote</a>
-      <a class="btn btn-line" href="#deploy">How It Deploys</a>
-    </div>
-    <div class="hud">
-      <div><div class="k">In a blackout</div><div class="v">Reach Anyone</div></div>
-      <div><div class="k">From one charge</div><div class="v">12+ Hours</div></div>
-      <div><div class="k">Setup</div><div class="v">~3 Min <em>NO TOOLS</em></div></div>
-      <div><div class="k">Cell coverage needed</div><div class="v">None <em>0%</em></div></div>
-    </div>
+<header class="top">
+  <div class="wrap topbar">
+    <a class="logo" href="#top">SATPACK<span>·</span>GO</a>
+    <nav>
+      <a href="#deploy">01 Deploy</a>
+      <a href="#get">02 What You Get</a>
+      <a href="#readout">03 Readout</a>
+      <a href="#uses">04 Uses</a>
+      <a href="#editions">05 Editions</a>
+    </nav>
+    <a class="btn solid" href="#order">Order / Quote</a>
   </div>
 </header>
 
-<div class="marquee" aria-hidden="true">
-  <div class="marquee-track">
-    <span>Reach Family <b>//</b></span><span>Call For Help <b>//</b></span><span>Keep Working <b>//</b></span><span>Whole Crew Online <b>//</b></span><span>Runs 12+ Hours <b>//</b></span><span>Works In The Rain <b>//</b></span><span>Three-Minute Setup <b>//</b></span><span>No Cell Towers Needed <b>//</b></span>
-    <span>Reach Family <b>//</b></span><span>Call For Help <b>//</b></span><span>Keep Working <b>//</b></span><span>Whole Crew Online <b>//</b></span><span>Runs 12+ Hours <b>//</b></span><span>Works In The Rain <b>//</b></span><span>Three-Minute Setup <b>//</b></span><span>No Cell Towers Needed <b>//</b></span>
+<!-- ================= MASTHEAD ================= -->
+<div class="mast" id="top">
+  <div class="wrap">
+    <span class="kicker">Emergency Internet Kit — Built in Calgary, Alberta</span>
+    <h1>When the grid goes down, set this down.</h1>
+    <p class="lede">Cell towers fail exactly when you need them most. SatPack Go turns any patch of open sky into working internet — video calls, maps, weather, check-ins — for everyone with you. <b>Set the sealed case on the ground, flip one switch, done. You never even open it.</b></p>
+    <div class="mast-ctas">
+      <a class="btn solid" href="#order">Order / Request a Quote</a>
+      <a class="btn" href="#deploy">How it deploys</a>
+    </div>
+    <div class="facts">
+      <div><div class="k">In a blackout</div><div class="v">Reach anyone</div></div>
+      <div><div class="k">From one charge</div><div class="v">12+ hours</div></div>
+      <div><div class="k">Setup</div><div class="v">~3 min, no tools</div></div>
+      <div><div class="k">Cell coverage needed</div><div class="v">None</div></div>
+    </div>
+    <figure class="hero-fig">
+      <img src="assets/generated/q_evac_gpt.jpg" alt="Family waiting calmly at their SUV tailgate under wildfire smoke, SatPack Go case deployed flat on the gravel, connected">
+      <figcaption class="figcap"><b>Fig. 01</b> — Highway pullout under wildfire smoke. Case deployed flat, label to the sky; family online from the tailgate.</figcaption>
+    </figure>
   </div>
 </div>
 
-<!-- ================= DEPLOY ================= -->
+<!-- ================= 01 DEPLOY ================= -->
 <section id="deploy">
   <div class="wrap">
-    <span class="tag rv">Field Deployment</span>
-    <h2 class="rv">Online in minutes.<br><span class="dim">Zero assembly.</span></h2>
-    <div class="steps rv">
+    <div class="sec-head"><span class="sec-num">01</span><h2>Online in minutes. Zero assembly.</h2><span class="sub">Field deployment</span></div>
+    <div class="steps">
       <div class="step">
-        <span class="lbl">Step / 01</span>
-        <div class="num">01</div>
-        <h3>Set It Down. Keep It Closed.</h3>
+        <span class="n">STEP 1</span>
+        <h3>Set it down. Keep it closed.</h3>
         <p>Lay the case flat anywhere with open sky — the label shows which face points up. The satellite antenna connects right through the sealed case. Rain, dust, snow: it stays shut.</p>
       </div>
       <div class="step">
-        <span class="lbl">Step / 02</span>
-        <div class="num">02</div>
-        <h3>Power On</h3>
-        <p>One switch on the sealed side panel wakes the battery, the satellite terminal, and the onboard Wi-Fi. The power display confirms everything — % and hours remaining — without opening a latch.</p>
+        <span class="n">STEP 2</span>
+        <h3>Power on</h3>
+        <p>One switch on the sealed side panel wakes the battery, the satellite terminal, and the Wi-Fi. The power display confirms everything — % and hours remaining — without opening a latch.</p>
       </div>
       <div class="step">
-        <span class="lbl">Step / 03</span>
-        <div class="num">03</div>
-        <h3>Do Normal Things</h3>
+        <span class="n">STEP 3</span>
+        <h3>Do normal things</h3>
         <p>Join the Wi-Fi and carry on: call your family, check the fire map, send the report, take the video call — hundreds of kilometres from the nearest cell tower.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= USE CASES ================= -->
-<section id="uses" class="rule">
+<!-- ================= 02 WHAT YOU GET ================= -->
+<section id="get" style="padding-top:0">
   <div class="wrap">
-    <span class="tag rv">Who Runs One</span>
-    <h2 class="rv">One case.<br><span class="dim">Four jobs.</span></h2>
-    <div class="uses rv">
-      <div class="use"><img src="assets/generated/q_blackout2.jpg" alt="Neighbourhood blackout, one connected household" loading="lazy"><div class="ucap"><h3>Emergency &amp; Home Backup</h3><p>Outages, evacuations, storm season. The case in the closet that keeps your family connected when the towers aren't.</p></div></div>
-      <div class="use"><img src="assets/generated/q2_filmset.jpg" alt="SatPack Go beside a cinema camera on a remote set" loading="lazy"><div class="ucap"><h3>Productions &amp; Rentals</h3><p>Remote sets and events. Proven on working productions — buy, or rent by the week. Long-range Wi-Fi option for big sites.</p></div></div>
-      <div class="use"><img src="assets/generated/q2_worksite.jpg" alt="SatPack Go at a forestry work site" loading="lazy"><div class="ucap"><h3>Field Operations</h3><p>Forestry, construction, energy. Timesheets, safety check-ins, and video calls at sites with zero bars.</p></div></div>
-      <div class="use"><img src="assets/generated/q2_winter.jpg" alt="SatPack Go in winter at a remote treeline" loading="lazy"><div class="ucap"><h3>Acreage &amp; Cabin</h3><p>Internet where the line never reached — and a lifeline when the road's snowed in. Solar edition runs indefinitely.</p></div></div>
+    <div class="sec-head"><span class="sec-num">02</span><h2>Not an SOS text. Real internet.</h2><span class="sub">What you get</span></div>
+    <div class="split">
+      <ul class="get-list">
+        <li><span class="gi">2.1</span><div><h4>Everyone online, at full speed</h4><p>Video calls, maps, banking, school, work — actual internet for every phone and laptop with you, not a one-line satellite SOS. (Starlink Mini inside, Wi-Fi built in.)</p></div></li>
+        <li><span class="gi">2.2</span><div><h4>12+ hours from one charge</h4><p>Runs at least 12 hours on the built-in battery — indefinitely when paired with a solar panel. No generator, no idling truck; recharge at any wall outlet.</p></div></li>
+        <li><span class="gi">2.3</span><div><h4>Know exactly where you stand</h4><p>The side display shows battery % and hours remaining — decide who calls whom while you still have runway, not when the screen goes dark.</p></div></li>
+        <li><span class="gi">2.4</span><div><h4>Ready the day it matters</h4><p>Sits in a closet or truck box for months, then works in rain, dust, or snow — without you opening a latch. Grab it by the handle and go.</p></div></li>
+        <li><span class="gi">2.5</span><div><h4>Grows with the job</h4><p>Add solar and stay online for weeks (Solar edition) · long-range Wi-Fi to cover a film set or work camp (quote builds).</p></div></li>
+      </ul>
+      <figure>
+        <img src="assets/photos/IMG_5188.png" alt="SatPack Go case, three-quarter view showing the sealed side control panel" style="background:#fff;padding:24px">
+        <figcaption class="figcap"><b>Fig. 02</b> — Production unit, three-quarter view. Power switch, battery display, and charge port are on the sealed side panel.</figcaption>
+      </figure>
     </div>
   </div>
 </section>
 
-<!-- ================= INSIDE ================= -->
-<section id="inside" class="rule">
-  <div class="wrap split">
-    <div class="case-img rv">
-      <span class="frame-lbl">Unit / Vault Edition</span>
-      <img src="assets/photos/IMG_5188.png" alt="SatPack Go case, three-quarter view showing the side control panel">
-    </div>
-    <div>
-      <span class="tag rv">What You Get</span>
-      <h2 class="rv">Not an SOS text.<br><span class="dim">Real internet.</span></h2>
-      <ul class="kit-list">
-        <li class="rv"><span class="idx">/01</span><div><h4>Everyone Online, At Full Speed</h4><p>Video calls, maps, banking, school, work — actual internet for every phone and laptop with you, not a one-line satellite SOS. (Starlink Mini inside, Wi-Fi built in.)</p></div></li>
-        <li class="rv"><span class="idx">/02</span><div><h4>12+ Hours From One Charge</h4><p>Runs at least 12 hours on the built-in battery — indefinitely when paired with a solar panel. No generator, no idling truck; recharge at any wall outlet.</p></div></li>
-        <li class="rv"><span class="idx">/03</span><div><h4>Know Exactly Where You Stand</h4><p>The side display shows battery % and hours remaining — decide who calls whom while you still have runway, not when the screen goes dark.</p></div></li>
-        <li class="rv"><span class="idx">/04</span><div><h4>Ready The Day It Matters</h4><p>Sits in a closet or truck box for months, then works in rain, dust, or snow — without you opening a latch. Grab it by the handle and go.</p></div></li>
-        <li class="rv"><span class="idx">/05</span><div><h4>Grows With The Job</h4><p>Add solar and stay online for weeks, not hours (Solar edition) · long-range Wi-Fi to cover a film set or work camp (quote builds).</p></div></li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ================= MONITOR ================= -->
-<section id="monitor" class="telemetry rule">
-  <div class="wrap split">
-    <div>
-      <span class="tag rv">Power Telemetry</span>
-      <h2 class="rv">Know your runway,<br><span class="dim">to the hour.</span></h2>
-      <p class="rv" style="color:var(--txt-2);max-width:480px">The worst moment to guess your remaining power is the moment it matters. SatPack Go doesn't make you guess.</p>
-      <ul class="tele-feats">
-        <li class="rv">Glance at the side panel: battery % and hours remaining, live — plan the night instead of hoping</li>
-        <li class="rv">It counts every milliamp in and out (a true hardware fuel gauge, not a voltage guess)</li>
-        <li class="rv">Charging or full? The display says so — the case stays shut</li>
-        <li class="rv">Cools itself when it's working hard; between uses it sleeps for months and stays ready</li>
-      </ul>
-    </div>
-    <div class="rv">
-      <div class="oled">
-        <div class="chg"><span class="bolt">⚡</span> CHARGING</div>
-        <div class="big" id="socNum">87<span style="font-size:38px">%</span></div>
-        <div class="cap">Battery Level</div>
-        <div class="row2">
-          <div><div class="k">Time Remaining</div><div class="v">11.5 h</div></div>
-          <div><div class="k">Status</div><div class="v" style="color:var(--grn)">NOMINAL</div></div>
+<!-- ================= 03 READOUT ================= -->
+<section id="readout" class="readout">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Know your runway, to the hour.</h2><span class="sub">Power readout</span></div>
+    <div class="split">
+      <div>
+        <p style="color:var(--ink-2);max-width:480px;margin-bottom:10px">The worst moment to guess your remaining power is the moment it matters. SatPack Go doesn't make you guess.</p>
+        <ul class="tele-list">
+          <li>Glance at the side panel: battery % and hours remaining, live — plan the night instead of hoping</li>
+          <li>It counts every milliamp in and out (a true hardware fuel gauge, not a voltage guess)</li>
+          <li>Charging or full? The display says so — the case stays shut</li>
+          <li>Cools itself when it's working hard; between uses it sleeps for months and stays ready</li>
+        </ul>
+      </div>
+      <figure class="oled-fig">
+        <div class="oled">
+          <div class="chg">⚡ CHARGING</div>
+          <div class="big" id="socNum">87<span style="font-size:32px">%</span></div>
+          <div class="cap">Battery Level</div>
+          <div class="row2">
+            <div><div class="k">Time Remaining</div><div class="v">11.5 h</div></div>
+            <div><div class="k">Status</div><div class="v" style="color:#7ce0a3">NOMINAL</div></div>
+          </div>
         </div>
+        <figcaption class="figcap"><b>Fig. 03</b> — Built-in power display (actual interface). Percentage and hours-remaining update live.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 04 USES ================= -->
+<section id="uses">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">04</span><h2>One case. Four jobs.</h2><span class="sub">Who runs one</span></div>
+    <div class="uses">
+      <div class="use">
+        <img src="assets/generated/q_blackout2.jpg" alt="Neighbourhood blackout, one connected household" loading="lazy">
+        <h3>Emergency &amp; home backup</h3>
+        <p>Outages, evacuations, storm season. The case in the closet that keeps your family connected when the towers aren't.</p>
+      </div>
+      <div class="use">
+        <img src="assets/generated/q2_filmset.jpg" alt="SatPack Go beside a cinema camera cart on a remote set" loading="lazy">
+        <h3>Productions &amp; rentals</h3>
+        <p>Remote sets and events. Proven on working productions — buy, or rent by the week. Long-range Wi-Fi option for big sites.</p>
+      </div>
+      <div class="use">
+        <img src="assets/generated/q2_worksite.jpg" alt="SatPack Go at a forestry work site beside hardhat and gloves" loading="lazy">
+        <h3>Field operations</h3>
+        <p>Forestry, construction, energy. Timesheets, safety check-ins, and video calls at sites with zero bars.</p>
+      </div>
+      <div class="use">
+        <img src="assets/generated/q2_winter.jpg" alt="SatPack Go on packed snow beside a snowmobile at dusk" loading="lazy">
+        <h3>Acreage &amp; cabin</h3>
+        <p>Internet where the line never reached — and a lifeline when the road's snowed in. Solar edition runs indefinitely.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= EDITIONS ================= -->
-<section id="editions">
+<!-- ================= 05 EDITIONS ================= -->
+<section id="editions" style="padding-top:0">
   <div class="wrap">
-    <span class="tag rv">Configurations</span>
-    <h2 class="rv">Two editions.<br><span class="dim">One case to grab.</span></h2>
-    <div class="editions">
-      <div class="ed base rv">
-        <span class="ed-tag">Edition / 01</span>
+    <div class="sec-head"><span class="sec-num">05</span><h2>Two editions. One case to grab.</h2><span class="sub">Configurations</span></div>
+    <div class="eds">
+      <div class="ed">
+        <span class="et">Edition 01</span>
         <h3>SatPack Go</h3>
+        <div class="price">$2,495 CAD · built to order</div>
         <p class="sub">The closet-to-connected kit: all-day internet anywhere, recharged at any outlet.</p>
         <ul>
-          <li class="on">Real internet for everyone with you — set it down, switch on</li>
-          <li class="on">Runs 12+ hours on one charge</li>
-          <li class="on">Always know your hours remaining</li>
-          <li class="on">Recharges overnight from any wall outlet</li>
-          <li class="on">Stored for months, ready in minutes</li>
-          <li>Sun-powered — stays online for weeks (Solar edition)</li>
+          <li>Real internet for everyone with you — set it down, switch on</li>
+          <li>Runs 12+ hours on one charge</li>
+          <li>Always know your hours remaining</li>
+          <li>Recharges overnight from any wall outlet</li>
+          <li>Stored for months, ready in minutes</li>
+          <li class="off">Sun-powered — stays online indefinitely (Solar edition)</li>
         </ul>
       </div>
-      <div class="ed solar rv">
-        <span class="ribbon">Extended Ops</span>
-        <span class="ed-tag">Edition / 02</span>
+      <div class="ed solar">
+        <span class="et">Edition 02 — Extended ops</span>
         <h3>SatPack Go — Solar</h3>
+        <div class="price">$2,995 CAD · built to order</div>
         <p class="sub">Everything in the base kit — plus the sun. Stay online indefinitely.</p>
         <ul>
-          <li class="on">Everything in the base kit</li>
-          <li class="on">Plug in a folding panel — the sun does the recharging</li>
-          <li class="on">Multi-day outages, remote camps, long deployments</li>
-          <li class="on">Weather-resistant charge port — connects with the case closed</li>
-          <li class="on">Smart solar controller squeezes cloudy days for every watt</li>
-          <li class="on">100 W panel bundle available</li>
+          <li>Everything in the base kit</li>
+          <li>Plug in a folding panel — the sun does the recharging</li>
+          <li>Multi-day outages, remote camps, long deployments</li>
+          <li>Weather-resistant charge port — connects with the case closed</li>
+          <li>Smart solar controller squeezes cloudy days for every watt</li>
+          <li>100 W panel bundle available</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= FIELD / GALLERY ================= -->
-<section id="field" class="rule">
+<!-- ================= 06 FIELD ================= -->
+<section id="field" style="padding-top:0">
   <div class="wrap">
-    <span class="tag rv">In the Field</span>
-    <h2 class="rv">Built for the places<br><span class="dim">the grid forgot.</span></h2>
-    <div class="gal rv">
-      <a class="wide" href="assets/generated/q2_storm.jpg" data-cap="Outage / Storm Front"><img src="assets/generated/q2_storm.jpg" alt="SatPack Go on a truck tailgate above a blacked-out town under a storm front" loading="lazy"></a>
-      <a href="assets/generated/q_rain2.jpg" data-cap="Sealed / Working in Rain"><img src="assets/generated/q_rain2.jpg" alt="Rain striking the sealed SatPack Go case deployed flat on wet gravel" loading="lazy"></a>
-      <a href="assets/generated/am_tailgate.jpg" data-cap="Field Snap / Midday"><img src="assets/generated/am_tailgate.jpg" alt="SatPack Go deployed flat on a dusty pickup tailgate on a gravel road" loading="lazy"></a>
-      <a href="assets/generated/q_flatdeploy_gpt.jpg" data-cap="Deployed / Label To The Sky"><img src="assets/generated/q_flatdeploy_gpt.jpg" alt="SatPack Go deployed flat on prairie gravel, label to the sky, video call running on a phone beside it" loading="lazy"></a>
-      <a class="wide" href="assets/generated/am_lawn.jpg" data-cap="Home Backup / Backyard Test"><img src="assets/generated/am_lawn.jpg" alt="SatPack Go deployed flat on a backyard lawn on an overcast day" loading="lazy"></a>
+    <div class="sec-head"><span class="sec-num">06</span><h2>Built for the places the grid forgot.</h2><span class="sub">Field notes</span></div>
+    <div class="gal">
+      <figure class="wide">
+        <img src="assets/generated/q2_storm.jpg" alt="SatPack Go deployed on a tailgate above a valley during a night storm" loading="lazy">
+        <figcaption class="figcap"><b>Fig. 06a</b> — Storm front, valley outage. Deployed on the tailgate, sealed against the rain.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/generated/q_rain2.jpg" alt="Rain striking the sealed SatPack Go case deployed flat on wet gravel" loading="lazy">
+        <figcaption class="figcap"><b>Fig. 06b</b> — Raining on it while it works.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/generated/q_flatdeploy_gpt.jpg" alt="SatPack Go deployed flat on prairie gravel, video call running on a phone beside it" loading="lazy">
+        <figcaption class="figcap"><b>Fig. 06c</b> — Deployed: flat, label to the sky.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/generated/am_tailgate.jpg" alt="SatPack Go deployed flat on a dusty pickup tailgate on a gravel road" loading="lazy">
+        <figcaption class="figcap"><b>Fig. 06d</b> — Field snap, midday.</figcaption>
+      </figure>
+      <figure class="wide">
+        <img src="assets/generated/am_lawn.jpg" alt="SatPack Go deployed flat on a backyard lawn on an overcast day" loading="lazy">
+        <figcaption class="figcap"><b>Fig. 06e</b> — Backyard test run before storm season.</figcaption>
+      </figure>
     </div>
   </div>
 </section>
 
-<!-- ================= CTA ================= -->
-<section class="cta" id="order">
-  <div class="wrap">
-    <span class="tag rv" style="justify-content:center">Availability</span>
-    <h2 class="rv">Ready before<br>you need it.</h2>
-    <p class="rv">Built to order in Calgary, Alberta. SatPack Go from <b style="color:var(--org)">$2,495 CAD</b> · Solar edition <b style="color:var(--org)">$2,995 CAD</b> — Starlink Mini included, activate on your own plan (pause it when you don't need it). Multi-unit pricing for departments and fleets · production/crew builds with long-range Wi-Fi · <b style="color:var(--txt)">rentals available</b> for productions and events.</p>
-    <a class="btn btn-solid rv" href="mailto:hello@satpackgo.com?subject=SatPack%20Go%20—%20Order%20Inquiry">Order / Ask a Question</a>
+<!-- ================= ORDER ================= -->
+<section class="order" id="order">
+  <div class="wrap order-grid">
+    <div>
+      <span class="kicker">Availability</span>
+      <h2>Ready before you need it.</h2>
+      <p>Built to order in Calgary, Alberta. Starlink Mini included — activate on your own plan and pause it any month you don't need it; no fees to us. Multi-unit pricing for departments and fleets · production/crew builds with long-range Wi-Fi · rentals available for productions and events.</p>
+      <p class="price-line">SatPack Go <b>$2,495 CAD</b> · Solar edition <b>$2,995 CAD</b></p>
+      <a class="btn solid" href="mailto:hello@satpackgo.com?subject=SatPack%20Go%20—%20Order%20Inquiry">Order / Ask a Question</a>
+    </div>
+    <div>
+      <ol class="how">
+        <li><span class="hn">1</span><div><b>Reach out.</b> Tell us which edition and how many. Quotes within 24 hours; POs welcome from municipalities and departments.</div></li>
+        <li><span class="hn">2</span><div><b>We build.</b> Each unit is assembled, tested, and burn-in checked by the builder — in Calgary.</div></li>
+        <li><span class="hn">3</span><div><b>Delivery or pickup.</b> Local delivery/pickup in the Calgary area; courier options for the rest of Canada.</div></li>
+        <li><span class="hn">4</span><div><b>Activate together.</b> We walk you through Starlink activation on delivery. From the box to online in one visit.</div></li>
+      </ol>
+    </div>
   </div>
 </section>
 
 <footer>
   <div class="wrap foot">
-    <a class="logo" href="#top" style="font-size:15px">SATPACK<span class="dot">·</span>GO</a>
-    <span class="mono">Vault Edition · Self-Contained Satellite Internet System</span>
-    <span class="mono">Built in Calgary, AB · © 2026 SatPack Go</span>
+    <span>SATPACK·GO — Self-Contained Satellite Internet System</span>
+    <span>Built in Calgary, AB · Rev. 2026-07 · © 2026 SatPack Go</span>
   </div>
 </footer>
 
 <script>
-// reveal on scroll
-const io = new IntersectionObserver(es => es.forEach(e => {
-  if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-}), { threshold: .12 });
-document.querySelectorAll('.rv').forEach(el => io.observe(el));
-
-// stagger siblings inside grids/lists
-document.querySelectorAll('.steps,.kit-list,.editions,.gal,.tele-feats,.uses').forEach(group => {
-  [...group.children].forEach((c, i) => c.style.transitionDelay = (i * 90) + 'ms');
-});
-
-// hero video swap disabled — the mountain loop no longer matches the
-// failure-first hero; re-enable when an evac/blackout loop is generated.
-// (loop file kept at assets/video/hero_loop.mp4)
-
-// tiny OLED SOC flicker for life
+// subtle live readout — the only motion on the page
 const soc = document.getElementById('socNum');
 if (soc) setInterval(() => {
   const n = 86 + Math.round(Math.random() * 2);
-  soc.innerHTML = n + '<span style="font-size:38px">%</span>';
-}, 4000);
+  soc.innerHTML = n + '<span style="font-size:32px">%</span>';
+}, 5000);
 </script>
 </body>
 </html>
