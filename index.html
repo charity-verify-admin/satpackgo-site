@@ -85,7 +85,7 @@ header.top{
 @media(max-width:700px){.facts{grid-template-columns:1fr 1fr}.facts div{border-bottom:1px solid var(--rule)}}
 
 .hero-fig{margin-top:44px}
-.hero-fig img{width:100%;border:1px solid var(--rule-2)}
+.hero-fig img,.hero-fig video{width:100%;border:1px solid var(--rule-2);display:block}
 
 /* ---------- deploy steps ---------- */
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
@@ -203,7 +203,10 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
       <div><div class="k">Cell coverage needed</div><div class="v">None</div></div>
     </div>
     <figure class="hero-fig">
-      <img src="assets/generated/q_flatdeploy_gpt.jpg" alt="SatPack Go deployed flat on prairie gravel, video call running on a phone beside it">
+      <video autoplay muted loop playsinline preload="metadata" poster="assets/generated/q_flatdeploy_gpt.jpg" aria-label="SatPack Go deployed flat on prairie gravel, video call running on a phone beside it">
+        <source src="assets/video/hero_ambient_web.mp4" type="video/mp4">
+        <img src="assets/generated/q_flatdeploy_gpt.jpg" alt="SatPack Go deployed flat on prairie gravel, video call running on a phone beside it">
+      </video>
       <figcaption class="figcap"><b>Fig. 01</b> — The whole skill: set it down, walk away, make your call. Open sky is the only requirement.</figcaption>
     </figure>
   </div>
@@ -244,6 +247,7 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
         <li><span class="gi">2.3</span><div><h4>Know exactly where you stand</h4><p>The side display shows battery % and hours remaining — decide who calls whom while you still have runway, not when the screen goes dark.</p></div></li>
         <li><span class="gi">2.4</span><div><h4>Ready the day it matters</h4><p>Sits in a closet or truck box for months, then works in rain, dust, or snow — without you opening a latch. Grab it by the handle and go.</p></div></li>
         <li><span class="gi">2.5</span><div><h4>Grows with the job</h4><p>Add solar and stay online for weeks (Solar edition) · long-range Wi-Fi to cover a film set or work camp (quote builds).</p></div></li>
+        <li><span class="gi">2.6</span><div><h4>Works on the move</h4><p>Strap it flat to the roof rack and it stays online down the highway — self-powered, nothing to plug in. Live maps, weather, and calls for everyone aboard, between towns. (In-motion use depends on your Starlink service plan.)</p></div></li>
       </ul>
       <figure>
         <img src="assets/photos/real_34side.png" alt="SatPack Go production unit showing the sealed side control panel: power switch, battery display, DC charge input" style="background:#fff;padding:24px">
@@ -366,6 +370,10 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
         <img src="assets/generated/am_lawn.jpg" alt="SatPack Go deployed flat on a backyard lawn on an overcast day" loading="lazy">
         <figcaption class="figcap"><b>Fig. 06d</b> — Practice on a boring Sunday, so it's boring when it's urgent.</figcaption>
       </figure>
+      <figure class="wide">
+        <img src="assets/generated/rr_roofrack.jpg" alt="SatPack Go strapped flat to the roof-rack crossbars of a dusty SUV on a prairie gravel road" loading="lazy">
+        <figcaption class="figcap"><b>Fig. 06e</b> — It doesn't need to be parked. Strapped flat to the crossbars, self-powered, it keeps maps and calls live between towns.</figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -419,6 +427,10 @@ if (cycK) setInterval(() => {
   cycK.textContent = flip ? 'Inside Temp' : 'Time Remaining';
   cycV.textContent = flip ? '21 \u00B0C' : '11.5 h';
 }, 3000);
+// respect reduced-motion: hold the hero on its poster frame
+if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.querySelectorAll('video[autoplay]').forEach(v => { v.removeAttribute('autoplay'); v.pause(); });
+}
 </script>
 </body>
 </html>
