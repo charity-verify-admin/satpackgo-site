@@ -791,7 +791,9 @@ if (reduceMotion) {
       const m = new Float32Array(16);
       m[0]=r[0]*sx; m[4]=r[1]*sx; m[8]=r[2]*sx;
       m[1]=r[3]*sy2; m[5]=r[4]*sy2; m[9]=r[5]*sy2;
-      m[2]=r[6]*0.5/radius; m[6]=r[7]*0.5/radius; m[10]=r[8]*0.5/radius;
+      // NEGATED z row: larger view-z = closer to camera, but WebGL keeps the
+      // SMALLEST clip z (gl.LESS) — without the flip you see the case inside-out.
+      m[2]=-r[6]*0.5/radius; m[6]=-r[7]*0.5/radius; m[10]=-r[8]*0.5/radius;
       m[15]=1;
       return [m, new Float32Array(r.length===9 ? [r[0],r[3],r[6], r[1],r[4],r[7], r[2],r[5],r[8]] : r)];
     }
