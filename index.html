@@ -367,7 +367,7 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
           <button class="peek-btn" id="peekBtn" type="button">PEEK</button>
           <span class="peek-note">the side-panel button, simulated</span>
         </div>
-        <figcaption class="figcap" style="max-width:290px;margin-top:12px"><b>Fig. 03</b> — Not a mockup: this replica runs the firmware's own font bytes and screen layout, lifted straight from the source (the real screen is under an inch across). Press PEEK to step through its three screens — Battery Level, Hours Remaining, Temperature — same as the button on the case.</figcaption>
+        <figcaption class="figcap" style="max-width:290px;margin-top:12px"><b>Fig. 03</b> — Not a mockup: this replica runs the firmware's own font bytes and screen layout, lifted straight from the source (the real screen is under an inch across). It cycles through its four readouts — hours remaining, voltage, battery level, inside temperature — on its own; PEEK skips ahead, same as the button on the case.</figcaption>
       </figure>
     </div>
   </div>
@@ -607,8 +607,8 @@ const oled = document.getElementById('oledCanvas');
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 if (oled) {
   const ctx = oled.getContext('2d');
-  let screen = 0, boltPhase = 0;      // disp_screen: 0 Battery %, 1 Hours, 2 Temperature
-  const charging = true;              // sim state (ma < -100 in firmware terms)
+  let screen = 0, boltPhase = 0, dwell = 0;  // disp_screen: 0 Hours, 1 Volts, 2 Battery %, 3 Temp
+  const charging = true;                     // sim state (ma < -100 in firmware terms)
   function otext(str, col, y, scale, color) {   // oled_print_scaled: advance 6*scale/char
     ctx.fillStyle = color;
     for (let i = 0; i < str.length; i++) {
@@ -630,17 +630,25 @@ if (oled) {
       otext('Charging', 40, 4, 1, '#ffd75e');
     }
     // Blue band: one BIG 3x 4-char value (col 28, page 3 -> y 24) + 1x label (page 7 -> y 56).
+    // Cycle order matches the firmware: Hours -> Voltage -> Battery % -> Temperature.
     let val, label, labelCol;
-    if (screen === 0)      { val = ' 87%'; label = 'Battery Level';   labelCol = 25; }
-    else if (screen === 1) { val = '11.5'; label = 'Hours Remaining'; labelCol = 19; }
+    if (screen === 0)      { val = '11.5'; label = 'Hours Remaining'; labelCol = 19; }
+    else if (screen === 1) { val = '13.2'; label = 'Voltage';         labelCol = 43; }
+    else if (screen === 2) { val = ' 87%'; label = 'Battery Level';   labelCol = 25; }
     else                   { val = ' 21C'; label = 'Temperature';     labelCol = 31; }
     otext(val, 28, 24, 3, '#bfe3ff');
     otext(label, labelCol, 56, 1, '#bfe3ff');
   }
   draw();
-  if (!reduceMotion) setInterval(() => { boltPhase++; draw(); }, 1000);  // bolt toggles each render, ~1 s
+  // ~1 s render tick, like the firmware loop: bolt toggles every render, and the
+  // screen auto-advances after DISPLAY_CYCLE_SECS (3 s) of dwell.
+  if (!reduceMotion) setInterval(() => {
+    boltPhase++;
+    if (++dwell >= 3) { dwell = 0; screen = (screen + 1) % 4; }
+    draw();
+  }, 1000);
   const peek = document.getElementById('peekBtn');
-  if (peek) peek.addEventListener('click', () => { screen = (screen + 1) % 3; draw(); });
+  if (peek) peek.addEventListener('click', () => { screen = (screen + 1) % 4; dwell = 0; draw(); });
 }
 // ---------- runway calculator: straight Wh math ----------
 const calcSlider = document.getElementById('calcSlider');
