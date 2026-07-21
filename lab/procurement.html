@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SatPack Go — Lab: Departmental (procurement-first)</title>
+<style>
+/* LAB VARIANT: "Departmental" — spec-table-first, PO-friendly, cool institutional
+   tones. Written for the person who has to justify the purchase to a council or
+   chief, not the person who wants the gadget. The test: does leading with
+   procurement language win the beachhead (VFDs, municipalities, SAR) faster? */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#fff;--ink:#1c2126;--ink2:#4a545e;--ink3:#7d8894;--rule:#dde3e8;--acc:#1f4e6b;--accbg:#eef4f8}
+body{background:var(--bg);color:var(--ink);font-family:-apple-system,"Segoe UI","Helvetica Neue",Arial,sans-serif;font-size:15.5px}
+.wrap{max-width:1140px;margin:0 auto;padding:0 26px}
+a{color:inherit;text-decoration:none}
+.btn{display:inline-block;background:var(--acc);color:#fff;font-weight:600;font-size:14.5px;padding:12px 24px;border-radius:4px}
+.btn.line{background:#fff;color:var(--acc);border:1.5px solid var(--acc)}
+.topbar{border-bottom:3px solid var(--acc)}
+.topbar .in{display:flex;justify-content:space-between;align-items:center;padding:16px 0}
+.logo{font-weight:800;letter-spacing:.18em;font-size:14px}
+.logo small{display:block;letter-spacing:.02em;font-weight:500;color:var(--ink3);font-size:11.5px;margin-top:2px}
+/* hero */
+.hero{padding:56px 0 64px;border-bottom:1px solid var(--rule);background:linear-gradient(#fff,#fbfcfd)}
+.hgrid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:start}
+.hero h1{font-size:clamp(30px,3.8vw,46px);line-height:1.12;letter-spacing:-.015em;margin:14px 0 16px}
+.kick{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--acc)}
+.hero p{color:var(--ink2);line-height:1.6;max-width:52ch}
+.hero .ctas{margin:26px 0 0;display:flex;gap:12px;flex-wrap:wrap}
+.hero .note{margin-top:14px;font-size:13px;color:var(--ink3)}
+/* spec card */
+.spec{border:1px solid var(--rule);border-radius:6px;overflow:hidden;box-shadow:0 1px 3px rgba(28,33,38,.06)}
+.spec .head{background:var(--accbg);padding:14px 18px;font-weight:700;font-size:13.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--acc)}
+.spec table{width:100%;border-collapse:collapse;font-size:14.5px}
+.spec td{padding:11px 18px;border-top:1px solid var(--rule);vertical-align:top}
+.spec td:first-child{color:var(--ink2);width:42%}
+.spec td:last-child{font-weight:600}
+/* sections */
+section{padding:74px 0;border-bottom:1px solid var(--rule)}
+h2{font-size:clamp(24px,2.8vw,32px);letter-spacing:-.01em;margin-bottom:10px}
+.sub{color:var(--ink2);max-width:64ch;line-height:1.6;margin-bottom:38px}
+/* deployments */
+.dep{border:1px solid var(--rule);border-radius:6px;overflow:hidden}
+.dep .row{display:grid;grid-template-columns:200px 1fr 220px;gap:24px;padding:20px 22px;border-top:1px solid var(--rule);align-items:center}
+.dep .row:first-child{border-top:0}
+.dep .who{font-weight:700}
+.dep .who small{display:block;font-weight:500;color:var(--ink3);font-size:12.5px;margin-top:3px}
+.dep p{color:var(--ink2);font-size:14.5px;line-height:1.55}
+.dep .tag{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--acc);background:var(--accbg);border-radius:99px;padding:6px 12px;justify-self:end;text-align:center}
+/* pricing table */
+.ptab{width:100%;border-collapse:collapse;border:1px solid var(--rule)}
+.ptab th{background:var(--accbg);color:var(--acc);text-transform:uppercase;font-size:12.5px;letter-spacing:.08em;text-align:left;padding:12px 18px}
+.ptab td{padding:14px 18px;border-top:1px solid var(--rule);vertical-align:top}
+.ptab .p{font-weight:700;white-space:nowrap}
+.ptab small{color:var(--ink3)}
+/* assurance */
+.agrid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.agrid .a{border:1px solid var(--rule);border-radius:6px;padding:22px}
+.agrid h3{font-size:16px;margin-bottom:8px}
+.agrid p{color:var(--ink2);font-size:14px;line-height:1.55}
+/* cta */
+.cta{padding:70px 0;text-align:center;border-bottom:0}
+.cta h2{margin-bottom:8px}
+.cta p{color:var(--ink2);margin-bottom:26px}
+.fine{color:var(--ink3);font-size:12px;text-align:center;padding:26px 0 30px;border-top:1px solid var(--rule)}
+img.proof{width:100%;display:block;border:1px solid var(--rule);border-radius:6px}
+@media(max-width:880px){.hgrid{grid-template-columns:1fr}.dep .row{grid-template-columns:1fr}.dep .tag{justify-self:start}.agrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="wrap in">
+  <span class="logo">SATPACK·GO<small>Emergency &amp; field internet — Calgary, Alberta</small></span>
+  <a class="btn" href="#quote">Request a quote</a>
+</div></div>
+
+<section class="hero">
+  <div class="wrap hgrid">
+    <div>
+      <span class="kick">For departments, municipalities &amp; field operations</span>
+      <h1>Deployable satellite internet your crew can operate with zero training.</h1>
+      <p>SatPack Go is a sealed, self-powered internet kit: set the case flat under open sky, flip one external switch, and the whole team is online in about three minutes. The case never opens in the field — there is nothing to assemble and nothing to get wet.</p>
+      <div class="ctas">
+        <a class="btn" href="#quote">Request a quote / PO</a>
+        <a class="btn line" href="#deployments">See deployments</a>
+      </div>
+      <p class="note">Quotes within 24 hours · Purchase orders welcome · Multi-unit pricing for fleets</p>
+    </div>
+    <div class="spec">
+      <div class="head">Specification — SatPack Go</div>
+      <table>
+        <tr><td>Terminal</td><td>Starlink Mini (included; activates on your plan)</td></tr>
+        <tr><td>Runtime</td><td>12+ hours per charge · indefinite with solar (Solar edition)</td></tr>
+        <tr><td>Deployment</td><td>~3 minutes, one operator, no tools</td></tr>
+        <tr><td>Operation</td><td>Sealed case — all controls external, never opened in use</td></tr>
+        <tr><td>Readout</td><td>Battery %, time remaining, voltage, internal temp</td></tr>
+        <tr><td>Recharge</td><td>Any 120 V wall outlet</td></tr>
+        <tr><td>Size</td><td>445 × 361 × 182 mm — half a carry-on, mid-shin flat</td></tr>
+        <tr><td>Build</td><td>Assembled &amp; burn-in tested by the builder, Calgary AB</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="deployments">
+  <div class="wrap">
+    <h2>Who runs one</h2>
+    <p class="sub">Every scenario below is the same 3-minute drill: set the sealed case down, switch on, get to work.</p>
+    <div class="dep">
+      <div class="row">
+        <div class="who">Film &amp; TV productions<small>Rental fleet — in service</small></div>
+        <p>Two crew-connectivity units built for film-industry rentals: production internet at remote locations, online before the first camera cart is unloaded.</p>
+        <div class="tag">Proven in service</div>
+      </div>
+      <div class="row">
+        <div class="who">Volunteer fire departments<small>Emergency operations</small></div>
+        <p>When the tower or the grid is down, the hall — or the truck — becomes the connected point for coordination, weather, and public updates.</p>
+        <div class="tag">Grid-down ready</div>
+      </div>
+      <div class="row">
+        <div class="who">Municipalities &amp; EOCs<small>Continuity of operations</small></div>
+        <p>A charged case in a closet is a continuity plan: communications for staff and residents in about three minutes, operated by whoever is present.</p>
+        <div class="tag">Zero training</div>
+      </div>
+      <div class="row">
+        <div class="who">Forestry, energy &amp; SAR<small>Remote field work</small></div>
+        <p>Works at the truck, on the cutblock, or strapped flat to a roof rack in motion — self-powered, no generator, no idling vehicle.</p>
+        <div class="tag">Self-powered</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Pricing</h2>
+    <p class="sub">Single-unit pricing below. Multi-unit and fleet pricing quoted per department — ask with your expected quantity.</p>
+    <table class="ptab">
+      <tr><th>Configuration</th><th>What's included</th><th>Price</th></tr>
+      <tr><td><b>SatPack Go</b></td><td>Sealed kit with Starlink Mini, internal battery, external controls &amp; readout</td><td class="p">$2,495 CAD</td></tr>
+      <tr><td><b>SatPack Go — Solar</b></td><td>Adds solar charge input + 100 W folding panel; net-positive in usable daylight</td><td class="p">$2,995 CAD</td></tr>
+      <tr><td><b>Rental</b></td><td>For productions &amp; events, includes walkthrough<br><small>Longer terms quoted</small></td><td class="p">$95/day · $475/wk<br>$1,195/mo</td></tr>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Assurance</h2>
+    <div class="agrid" style="margin-top:30px">
+      <div class="a"><h3>Built and tested here</h3><p>Each unit is assembled, tested, and burn-in checked by the builder in Calgary — and delivered with a hands-on activation walkthrough.</p></div>
+      <div class="a"><h3>Boring on purpose</h3><p>No proprietary app, no accounts, no subscription to us. Starlink service activates on your own plan and can be paused any month you don't need it.</p></div>
+      <div class="a"><h3>Paper-friendly</h3><p>Formal quotes within 24 hours, POs welcome, warranty and support terms provided in writing with every quote packet.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="quote">
+  <div class="wrap">
+    <h2>Request a quote</h2>
+    <p>Tell us the department, the expected quantity, and the edition — we'll return a formal quote within 24 hours.</p>
+    <a class="btn" href="mailto:hello@satpackgo.com?subject=SatPack%20Go%20—%20Quote%20Request%20(Department)">hello@satpackgo.com — Quote request</a>
+  </div>
+</section>
+
+<p class="fine">LAB PROTOTYPE — direction study only. SatPack Go · Calgary, Alberta</p>
+
+</body>
+</html>

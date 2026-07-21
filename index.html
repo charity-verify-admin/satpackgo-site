@@ -86,6 +86,13 @@ header.top{
 
 .hero-fig{margin-top:44px}
 .hero-fig img,.hero-fig video{width:100%;border:1px solid var(--rule-2);display:block}
+/* hybrid first screen: media-dominant, Starlink-confident, datasheet body below */
+.mast h1{font-size:clamp(38px,5.5vw,64px);line-height:1.04;letter-spacing:-.022em;margin:10px 0 14px}
+.mast .lede{font-size:clamp(17px,2vw,21px)}
+.btn.big{font-size:16px;padding:14px 28px}
+.hero-cinema{margin:40px 0 0}
+.hero-cinema video,.hero-cinema img{width:100%;aspect-ratio:2.35/1;object-fit:cover;border:0;border-top:1px solid var(--rule-2);border-bottom:1px solid var(--rule-2)}
+@media(max-width:700px){.hero-cinema video,.hero-cinema img{aspect-ratio:16/10}}
 
 /* ---------- deploy steps ---------- */
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
@@ -217,29 +224,31 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
   </div>
 </header>
 
-<!-- ================= MASTHEAD ================= -->
+<!-- ================= MASTHEAD (hybrid: cinematic first screen, datasheet after) ================= -->
 <div class="mast" id="top">
   <div class="wrap">
     <span class="kicker">Portable Internet Kit — Built in Calgary, Alberta</span>
     <h1>Internet, anywhere you set it down.</h1>
-    <p class="lede">No towers, no outlet, no setup. SatPack Go turns any patch of open sky into working internet — video calls, maps, weather, check-ins — for everyone with you: on a film set, at a remote site, at the cabin, or the day the grid goes down. <b>Set the sealed case on the ground, flip one switch, done. You never even open it.</b></p>
+    <p class="lede">No towers. No outlet. No setup. <b>You never even open it.</b></p>
     <div class="mast-ctas">
-      <a class="btn solid" href="#order">Order / Request a Quote</a>
-      <a class="btn" href="#deploy">How it deploys</a>
+      <a class="btn solid big" href="#order">Order — $2,495 CAD</a>
+      <a class="btn" href="#deploy">How it works</a>
     </div>
+  </div>
+  <figure class="hero-fig hero-cinema">
+    <video autoplay muted loop playsinline preload="metadata" poster="assets/generated/q_flatdeploy_gpt.jpg" aria-label="SatPack Go deployed flat on prairie gravel, video call running on a phone beside it">
+      <source src="assets/video/hero_ambient_web.mp4" type="video/mp4">
+      <img src="assets/generated/q_flatdeploy_gpt.jpg" alt="SatPack Go deployed flat on prairie gravel, video call running on a phone beside it">
+    </video>
+  </figure>
+  <div class="wrap">
+    <figcaption class="figcap" style="margin-top:10px"><b>Fig. 01</b> — The whole skill: set it down, walk away, make your call. Open sky is the only requirement.</figcaption>
     <div class="facts">
       <div><div class="k">In a blackout</div><div class="v">Reach anyone</div></div>
       <div><div class="k">From one charge</div><div class="v">12+ hours</div></div>
       <div><div class="k">Setup</div><div class="v">~3 min, no tools</div></div>
       <div><div class="k">Cell coverage needed</div><div class="v">None</div></div>
     </div>
-    <figure class="hero-fig">
-      <video autoplay muted loop playsinline preload="metadata" poster="assets/generated/q_flatdeploy_gpt.jpg" aria-label="SatPack Go deployed flat on prairie gravel, video call running on a phone beside it">
-        <source src="assets/video/hero_ambient_web.mp4" type="video/mp4">
-        <img src="assets/generated/q_flatdeploy_gpt.jpg" alt="SatPack Go deployed flat on prairie gravel, video call running on a phone beside it">
-      </video>
-      <figcaption class="figcap"><b>Fig. 01</b> — The whole skill: set it down, walk away, make your call. Open sky is the only requirement.</figcaption>
-    </figure>
   </div>
 </div>
 

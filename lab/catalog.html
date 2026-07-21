@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SatPack Go — Lab: Outfitter Catalog (warm field-gear)</title>
+<style>
+/* LAB VARIANT: "Outfitter catalog" — warm field-gear energy (Filson/YETI print
+   piece, but for electronics). Serif headlines, cream paper, story-led copy,
+   the builder front and center. The test: does warmth sell trust better than
+   engineering precision? */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--paper:#f4eee1;--ink:#292420;--ink2:#5c544a;--ink3:#8a8072;--rule:#d9d0bd;--acc:#a34a08}
+body{background:var(--paper);color:var(--ink);font-family:Georgia,'Times New Roman',serif}
+.wrap{max-width:1060px;margin:0 auto;padding:0 28px}
+a{color:inherit;text-decoration:none}
+.sans{font-family:-apple-system,"Helvetica Neue",Arial,sans-serif}
+.kick{font-family:-apple-system,"Helvetica Neue",Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--acc)}
+.btn{display:inline-block;font-family:-apple-system,"Helvetica Neue",Arial,sans-serif;font-weight:700;font-size:14px;letter-spacing:.06em;background:var(--ink);color:var(--paper);padding:14px 30px;border-radius:2px}
+.btn.line{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:22px 34px;border-bottom:2px solid var(--ink)}
+.logo{font-family:-apple-system,"Helvetica Neue",Arial,sans-serif;font-weight:800;letter-spacing:.2em;font-size:14px}
+.topbar .est{font-size:13px;font-style:italic;color:var(--ink2)}
+/* hero */
+.hero{padding:74px 0 0;text-align:center}
+.hero h1{font-size:clamp(38px,5.4vw,66px);font-weight:400;line-height:1.06;letter-spacing:-.01em;max-width:20ch;margin:18px auto 20px}
+.hero .sub{font-size:clamp(16px,1.9vw,20px);color:var(--ink2);font-style:italic;max-width:52ch;margin:0 auto 30px}
+.hero-img{margin-top:54px;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+.hero-img img{width:100%;display:block;max-height:66vh;object-fit:cover}
+.hero-cap{font-size:13.5px;color:var(--ink3);font-style:italic;padding:12px 0 0;text-align:center}
+/* story */
+.story{padding:100px 0;max-width:640px;margin:0 auto;text-align:center}
+.story p{font-size:clamp(17px,1.9vw,20px);line-height:1.75;color:var(--ink2)}
+.story p+p{margin-top:26px}
+.story .sig{margin-top:34px;font-style:italic;color:var(--ink)}
+/* catalog plate */
+.plate{border-top:2px solid var(--ink);padding:90px 0}
+.plate .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center}
+.plate .imgbox{background:#fff;border:1px solid var(--rule);padding:34px}
+.plate img{width:100%;display:block}
+.plate .no{font-family:-apple-system,"Helvetica Neue",Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:.2em;color:var(--ink3)}
+.plate h2{font-size:clamp(30px,3.6vw,44px);font-weight:400;margin:10px 0 8px}
+.plate .price{font-family:-apple-system,"Helvetica Neue",Arial,sans-serif;font-size:20px;font-weight:700;margin-bottom:26px}
+.plate .price s{color:var(--ink3);font-weight:400}
+.speclist{list-style:none;border-top:1.5px solid var(--ink)}
+.speclist li{display:flex;justify-content:space-between;gap:20px;padding:12px 2px;border-bottom:1px solid var(--rule);font-size:15.5px}
+.speclist .k{color:var(--ink2);font-style:italic}
+.speclist .v{font-family:-apple-system,"Helvetica Neue",Arial,sans-serif;font-weight:600;font-size:14.5px;text-align:right}
+.plate .ctas{margin-top:30px;display:flex;gap:12px;flex-wrap:wrap}
+/* field uses */
+.uses{border-top:2px solid var(--ink);padding:90px 0}
+.uses h2{text-align:center;font-size:clamp(28px,3.4vw,42px);font-weight:400;margin-bottom:60px}
+.ugrid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.ugrid figure img{width:100%;display:block;aspect-ratio:4/3;object-fit:cover;border:1px solid var(--rule)}
+.ugrid figcaption{font-size:14.5px;font-style:italic;color:var(--ink2);padding:12px 4px 0;line-height:1.5}
+/* promise */
+.promise{border-top:2px solid var(--ink);padding:90px 0;text-align:center}
+.promise h2{font-size:clamp(28px,3.4vw,42px);font-weight:400;max-width:24ch;margin:14px auto 18px}
+.promise p{max-width:56ch;margin:0 auto 30px;font-size:17px;line-height:1.7;color:var(--ink2)}
+.fine{font-family:-apple-system,"Helvetica Neue",Arial,sans-serif;color:var(--ink3);font-size:12px;text-align:center;padding:40px 0 34px;border-top:1px solid var(--rule);margin-top:40px}
+@media(max-width:820px){.plate .grid,.ugrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="logo">SATPACK·GO</span>
+  <span class="est">Built to order in Calgary, Alberta</span>
+  <a class="btn" href="#order" style="padding:10px 20px">Order</a>
+</div>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="kick">Portable Internet · No. 001</span>
+    <h1>Internet, anywhere you set it down.</h1>
+    <p class="sub">A sealed case that turns any patch of open sky into working internet — for the film set, the work camp, the cabin, and the day the grid goes down.</p>
+    <a class="btn" href="#order">Order — $2,495 CAD</a>
+  </div>
+  <div class="hero-img">
+    <img src="../assets/generated/am_tailgate.jpg" alt="SatPack Go deployed flat on a dusty pickup tailgate on a gravel road">
+  </div>
+  <p class="hero-cap wrap">No bars on the road means a three-minute wait, not a drive to town.</p>
+</section>
+
+<section class="story wrap">
+  <span class="kick">Why it exists</span>
+  <p>Cell towers fail exactly when you need them most. And the gear that's supposed to save you usually needs assembling, plugging in, and babying — in the rain, in the dark, in a hurry.</p>
+  <p>So we built the opposite: a case you set on the ground and switch on. The antenna works through the sealed lid. The battery is inside. The readout is on the outside. <em>You never even open it.</em></p>
+  <p class="sig">— Every unit assembled, tested, and burn-in checked by the builder, in Calgary.</p>
+</section>
+
+<section class="plate" id="order">
+  <div class="wrap grid" style="display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center">
+    <div class="imgbox">
+      <img src="../assets/photos/real_34side.png" alt="SatPack Go production unit — sealed side control panel with power switch, battery display, charge input">
+    </div>
+    <div>
+      <span class="no">CATALOG No. 001</span>
+      <h2>SatPack Go</h2>
+      <div class="price">$2,495 CAD &nbsp;·&nbsp; Solar edition $2,995</div>
+      <ul class="speclist">
+        <li><span class="k">Terminal</span><span class="v">Starlink Mini, included</span></li>
+        <li><span class="k">Runtime</span><span class="v">12+ hours · indefinite with solar</span></li>
+        <li><span class="k">Deployment</span><span class="v">~3 minutes, no tools</span></li>
+        <li><span class="k">Case</span><span class="v">Sealed — never opens in use</span></li>
+        <li><span class="k">Size</span><span class="v">Half a carry-on · mid-shin flat</span></li>
+        <li><span class="k">Recharge</span><span class="v">Any wall outlet</span></li>
+      </ul>
+      <div class="ctas">
+        <a class="btn" href="mailto:hello@satpackgo.com?subject=SatPack%20Go%20—%20Order%20Inquiry">Order / Ask a question</a>
+        <a class="btn line" href="mailto:hello@satpackgo.com?subject=SatPack%20Go%20—%20Rental%20Inquiry">Rent for a production</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="uses">
+  <div class="wrap">
+    <h2>Where it earns its keep</h2>
+    <div class="ugrid">
+      <figure><img src="../assets/generated/q2_filmset.jpg" alt="SatPack Go beside a cinema camera cart on a remote set"><figcaption>On set, the whole crew is online before the first camera is built.</figcaption></figure>
+      <figure><img src="../assets/generated/q2_worksite.jpg" alt="SatPack Go at a forestry work site"><figcaption>The site office works wherever the truck stops.</figcaption></figure>
+      <figure><img src="../assets/generated/q_evac_gpt.jpg" alt="Family at their SUV under wildfire smoke, connected"><figcaption>The cell network is gone. They're not.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="promise">
+  <div class="wrap">
+    <span class="kick">The promise</span>
+    <h2>Ready before you need it.</h2>
+    <p>It sits charged in a closet or truck box for months, then works in rain, dust, or snow — without you opening a latch. If you're a department or a fleet, ask about multi-unit pricing and purchase orders.</p>
+    <a class="btn" href="mailto:hello@satpackgo.com?subject=SatPack%20Go%20—%20Order%20Inquiry">Order — from $2,495 CAD</a>
+  </div>
+</section>
+
+<p class="fine">LAB PROTOTYPE — direction study only. SatPack Go · Built in Calgary, Alberta · hello@satpackgo.com</p>
+
+</body>
+</html>
