@@ -159,6 +159,14 @@ header.top{
 .dim-fig svg .hiline{stroke:#e8720c;stroke-width:1.2}
 .unit-btn{position:absolute;top:10px;right:10px;font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.08em;color:var(--ink-2);background:var(--paper,#fafaf7);border:1px solid var(--rule-2);border-radius:999px;padding:5px 12px;cursor:pointer}
 
+/* ---------- 3D case model ---------- */
+.model-fig{margin-top:28px}
+.model-box{position:relative;background:#fff;border:1px solid var(--rule-2)}
+.model-box canvas{width:100%;height:440px;display:block;cursor:grab;touch-action:none}
+.model-box canvas:active{cursor:grabbing}
+.model-hint{position:absolute;right:12px;bottom:10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--ink-3);pointer-events:none;text-transform:uppercase}
+@media(max-width:700px){.model-box canvas{height:300px}}
+
 /* ---------- uses ---------- */
 .uses{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
 @media(max-width:900px){.uses{grid-template-columns:1fr 1fr}}
@@ -343,6 +351,13 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
         </figure>
       </div>
     </div>
+    <figure class="model-fig">
+      <div class="model-box">
+        <canvas id="caseCanvas" aria-label="Interactive 3D model of the SatPack Go case — drag to rotate"></canvas>
+        <div class="model-hint" id="modelHint">drag to rotate</div>
+      </div>
+      <figcaption class="figcap"><b>Fig. 02c</b> — Not an artist's impression: this is the actual engineering geometry — the case shell plus the parts we designed onto it (side control pod on the left wall, twin fan vents on the back). The same 3D data our printed parts are made from. Drag it.</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -701,6 +716,123 @@ if (unitBtn) {
 if (reduceMotion) {
   document.querySelectorAll('video[autoplay]').forEach(v => { v.removeAttribute('autoplay'); v.pause(); });
 }
+// ---------- 3D case viewer: zero-dependency WebGL2, flat-shaded via derivatives ----------
+(() => {
+  const canvas = document.getElementById('caseCanvas');
+  if (!canvas) return;
+  let started = false;
+  new IntersectionObserver((es, obs) => {
+    if (es.some(e => e.isIntersecting)) { obs.disconnect(); if (!started) { started = true; boot(); } }
+  }, {rootMargin: '300px'}).observe(canvas);
+
+  async function boot() {
+    const gl = canvas.getContext('webgl2', {antialias: true, alpha: true});
+    if (!gl) { canvas.parentElement.style.display = 'none'; return; }
+    const buf = await (await fetch('assets/models/case_exterior.bin')).arrayBuffer();
+    const dv = new DataView(buf);
+    if (dv.getUint32(0, false) !== 0x53504731) return;      // 'SPG1'
+    const nv = dv.getUint32(4, true), nf = dv.getUint32(8, true);
+    const idxBits = dv.getUint8(12);
+    const mn = [], mx = [];
+    for (let i = 0; i < 3; i++) mn.push(dv.getFloat32(16 + i*4, true));
+    for (let i = 0; i < 3; i++) mx.push(dv.getFloat32(28 + i*4, true));
+    let off = 40;
+    const q = new Uint16Array(buf, off, nv*3); off += nv*6;
+    const idx = idxBits === 16 ? new Uint16Array(buf, off, nf*3) : new Uint32Array(buf, off, nf*3);
+    const pos = new Float32Array(nv*3);
+    const ctr = [(mn[0]+mx[0])/2, (mn[1]+mx[1])/2, (mn[2]+mx[2])/2];
+    for (let i = 0; i < nv; i++)
+      for (let c = 0; c < 3; c++)
+        pos[i*3+c] = mn[c] + q[i*3+c]/65535*(mx[c]-mn[c]) - ctr[c];
+    const radius = Math.hypot(mx[0]-mn[0], mx[1]-mn[1], mx[2]-mn[2]) / 2;
+
+    const vsrc = `#version 300 es
+      in vec3 p; uniform mat4 mvp; uniform mat3 mv3; out vec3 vp;
+      void main(){ vp = mv3 * p; gl_Position = mvp * vec4(p,1.0); }`;
+    const fsrc = `#version 300 es
+      precision highp float; in vec3 vp; out vec4 o;
+      void main(){
+        vec3 n = normalize(cross(dFdx(vp), dFdy(vp)));
+        if (n.z < 0.0) n = -n;                               // double-sided, face the camera
+        vec3 L1 = normalize(vec3(0.45, 0.55, 0.75));
+        vec3 L2 = normalize(vec3(-0.6, -0.3, 0.2));
+        float d = 0.24 + 0.62*max(dot(n,L1),0.0) + 0.18*max(dot(n,L2),0.0);
+        vec3 base = vec3(0.184, 0.196, 0.224);
+        o = vec4(base * d * 2.1, 1.0);
+      }`;
+    function sh(type, src) { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return s; }
+    const pr = gl.createProgram();
+    gl.attachShader(pr, sh(gl.VERTEX_SHADER, vsrc));
+    gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, fsrc));
+    gl.linkProgram(pr); gl.useProgram(pr);
+    const vao = gl.createVertexArray(); gl.bindVertexArray(vao);
+    const vb = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, vb);
+    gl.bufferData(gl.ARRAY_BUFFER, pos, gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(pr, 'p');
+    gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 3, gl.FLOAT, false, 0, 0);
+    const ib = gl.createBuffer(); gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ib);
+    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, idx, gl.STATIC_DRAW);
+    gl.enable(gl.DEPTH_TEST);
+    const uMVP = gl.getUniformLocation(pr, 'mvp'), uMV3 = gl.getUniformLocation(pr, 'mv3');
+
+    let yaw = -0.6, pitch = -1.1, vyaw = 0, auto = !reduceMotion, dragging = false, needs = true;
+    function mats() {
+      const cy = Math.cos(yaw), sy = Math.sin(yaw), cp = Math.cos(pitch), sp = Math.sin(pitch);
+      // view rotation = Rx(pitch) * Rz(yaw)  (model is Z-up)
+      const r = [
+        cy,      sy,      0,
+        -sy*cp,  cy*cp,   sp,
+        sy*sp,  -cy*sp,   cp
+      ];
+      const w = canvas.clientWidth, h = canvas.clientHeight, asp = w/h;
+      const s = 1/(radius*0.62);
+      const sx = s/Math.max(asp,1), sy2 = s*Math.min(asp,1);
+      // orthographic, z packed to [-0.5,0.5]
+      const m = new Float32Array(16);
+      m[0]=r[0]*sx; m[4]=r[1]*sx; m[8]=r[2]*sx;
+      m[1]=r[3]*sy2; m[5]=r[4]*sy2; m[9]=r[5]*sy2;
+      m[2]=r[6]*0.5/radius; m[6]=r[7]*0.5/radius; m[10]=r[8]*0.5/radius;
+      m[15]=1;
+      return [m, new Float32Array(r.length===9 ? [r[0],r[3],r[6], r[1],r[4],r[7], r[2],r[5],r[8]] : r)];
+    }
+    function size() {
+      const dpr = Math.min(devicePixelRatio || 1, 2);
+      const w = canvas.clientWidth*dpr | 0, h = canvas.clientHeight*dpr | 0;
+      if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; gl.viewport(0,0,w,h); }
+    }
+    function frame() {
+      size();
+      if (auto && !dragging) { yaw += 0.004; needs = true; }
+      if (!dragging && Math.abs(vyaw) > 0.0004) { yaw += vyaw; vyaw *= 0.94; needs = true; }
+      if (needs) {
+        needs = false;
+        gl.clearColor(0,0,0,0);
+        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+        const [m, r3] = mats();
+        gl.uniformMatrix4fv(uMVP, false, m);
+        gl.uniformMatrix3fv(uMV3, false, r3);
+        gl.drawElements(gl.TRIANGLES, nf*3, idxBits === 16 ? gl.UNSIGNED_SHORT : gl.UNSIGNED_INT, 0);
+      }
+      requestAnimationFrame(frame);
+    }
+    let px = 0, py = 0;
+    canvas.addEventListener('pointerdown', e => {
+      dragging = true; auto = false; px = e.clientX; py = e.clientY; vyaw = 0;
+      canvas.setPointerCapture(e.pointerId);
+      const hint = document.getElementById('modelHint'); if (hint) hint.style.opacity = '0.35';
+    });
+    canvas.addEventListener('pointermove', e => {
+      if (!dragging) return;
+      const dx = e.clientX - px, dy = e.clientY - py; px = e.clientX; py = e.clientY;
+      yaw += dx*0.008; vyaw = dx*0.0025;
+      pitch = Math.min(0.15, Math.max(-1.55, pitch + dy*0.006));
+      needs = true;
+    });
+    canvas.addEventListener('pointerup', () => dragging = false);
+    canvas.addEventListener('pointercancel', () => dragging = false);
+    requestAnimationFrame(frame);
+  }
+})();
 </script>
 </body>
 </html>
