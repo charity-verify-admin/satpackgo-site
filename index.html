@@ -121,6 +121,37 @@ header.top{
 .tele-list li{padding:12px 0 12px 26px;border-bottom:1px solid var(--rule);color:var(--ink-2);font-size:15px;position:relative}
 .tele-list li::before{content:"—";position:absolute;left:0;color:var(--org-ink);font-weight:600}
 
+/* ---------- pixel OLED replica ---------- */
+.oledpx{background:#07080c;border:1px solid #232634;border-radius:6px;padding:14px;box-shadow:inset 0 0 40px rgba(0,0,0,.55)}
+.oledpx canvas{width:100%;display:block;image-rendering:pixelated}
+.peek-row{display:flex;align-items:center;gap:12px;margin-top:12px}
+.peek-btn{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.12em;color:var(--ink-2);background:var(--card);border:1px solid var(--rule-2);border-radius:999px;padding:8px 18px;cursor:pointer}
+.peek-btn:active{transform:translateY(1px)}
+.peek-note{font-family:var(--mono);font-size:10.5px;color:var(--ink-3)}
+
+/* ---------- runway calculator ---------- */
+.calc{margin-top:28px;border:1px solid var(--rule-2);padding:18px 18px 14px;background:var(--card)}
+.calc .t{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.14em;color:var(--org-ink);text-transform:uppercase}
+.calc .row{display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin-top:14px}
+.calc .out{font-family:var(--mono);font-size:34px;font-weight:600;color:var(--ink);white-space:nowrap}
+.calc .out small{font-size:16px;color:var(--ink-3)}
+.calc .lbl{font-family:var(--mono);font-size:11.5px;color:var(--ink-2)}
+.calc input[type=range]{width:100%;accent-color:#e8720c;margin-top:6px}
+.calc .ticks{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--ink-3);margin-top:2px}
+.calc .fine{font-size:11.5px;color:var(--ink-3);margin-top:12px;line-height:1.55;border-top:1px solid var(--rule);padding-top:10px}
+
+/* ---------- dimension drawing ---------- */
+.dim-fig{margin-top:28px;position:relative}
+.dim-fig svg{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--rule-2)}
+.dim-fig svg text{font-family:var(--mono);font-size:11px;fill:#4a4a45}
+.dim-fig svg .dimline{stroke:#8a8a82;stroke-width:1}
+.dim-fig svg .body{stroke:#22221f;stroke-width:1.6;fill:none}
+.dim-fig svg .detail{stroke:#55554e;stroke-width:1;fill:none}
+.dim-fig svg .ghost{stroke:#b5b5ac;stroke-width:1.2;fill:none;stroke-dasharray:5 4}
+.dim-fig svg .hi{fill:#c25a00;font-weight:600}
+.dim-fig svg .hiline{stroke:#e8720c;stroke-width:1.2}
+.unit-btn{position:absolute;top:10px;right:10px;font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.08em;color:var(--ink-2);background:var(--paper,#fafaf7);border:1px solid var(--rule-2);border-radius:999px;padding:5px 12px;cursor:pointer}
+
 /* ---------- uses ---------- */
 .uses{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
 @media(max-width:900px){.uses{grid-template-columns:1fr 1fr}}
@@ -218,17 +249,17 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
     <div class="sec-head"><span class="sec-num">01</span><h2>Online in minutes. Zero assembly.</h2><span class="sub">Field deployment</span></div>
     <div class="steps">
       <div class="step">
-        <span class="n">STEP 1</span>
+        <span class="n">T+0:00 · STEP 1</span>
         <h3>Set it down. Keep it closed.</h3>
         <p>Lay the case flat anywhere with open sky — the label shows which face points up. The satellite antenna connects right through the sealed case. Rain, dust, snow: it stays shut.</p>
       </div>
       <div class="step">
-        <span class="n">STEP 2</span>
+        <span class="n">T+0:30 · STEP 2</span>
         <h3>Power on</h3>
         <p>One switch on the sealed side panel wakes the battery, the satellite terminal, and the Wi-Fi. The power display confirms everything — % and hours remaining — without opening a latch.</p>
       </div>
       <div class="step">
-        <span class="n">STEP 3</span>
+        <span class="n">T+3:00 · STEP 3</span>
         <h3>Do normal things</h3>
         <p>Join the Wi-Fi and carry on: call your family, check the fire map, send the report, take the video call — hundreds of kilometres from the nearest cell tower.</p>
       </div>
@@ -249,10 +280,58 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
         <li><span class="gi">2.5</span><div><h4>Grows with the job</h4><p>Add solar and stay online for weeks (Solar edition) · long-range Wi-Fi to cover a film set or work camp (quote builds).</p></div></li>
         <li><span class="gi">2.6</span><div><h4>Works on the move</h4><p>Strap it flat to the roof rack and it stays online down the highway — self-powered, nothing to plug in. Live maps, weather, and calls for everyone aboard, between towns. (In-motion use depends on your Starlink service plan.)</p></div></li>
       </ul>
-      <figure>
-        <img src="assets/photos/real_34side.png" alt="SatPack Go production unit showing the sealed side control panel: power switch, battery display, DC charge input" style="background:#fff;padding:24px">
-        <figcaption class="figcap"><b>Fig. 02</b> — Everything you touch lives on the outside: power, battery readout, charging. That's why the case never opens in the field — and why weather never matters.</figcaption>
-      </figure>
+      <div>
+        <figure>
+          <img src="assets/photos/real_34side.png" alt="SatPack Go production unit showing the sealed side control panel: power switch, battery display, DC charge input" style="background:#fff;padding:24px">
+          <figcaption class="figcap"><b>Fig. 02</b> — Everything you touch lives on the outside: power, battery readout, charging. That's why the case never opens in the field — and why weather never matters.</figcaption>
+        </figure>
+        <figure class="dim-fig">
+          <button class="unit-btn" id="unitBtn" type="button">mm → in</button>
+          <svg viewBox="0 0 620 470" role="img" aria-label="Dimensioned drawing of the SatPack Go case: top and side views to scale beside a carry-on suitcase">
+            <!-- top view -->
+            <rect class="body" x="60" y="48" width="267" height="217" rx="16"/>
+            <rect class="detail" x="73" y="61" width="241" height="191" rx="10"/>
+            <rect class="detail" x="136" y="259" width="26" height="10"/>
+            <rect class="detail" x="225" y="259" width="26" height="10"/>
+            <rect class="detail" x="327" y="127" width="9" height="62" rx="4"/>
+            <line class="dimline" x1="60" y1="46" x2="60" y2="28"/>
+            <line class="dimline" x1="327" y1="46" x2="327" y2="28"/>
+            <line class="dimline" x1="60" y1="33" x2="327" y2="33"/>
+            <text x="193" y="26" text-anchor="middle" data-mm="445 mm" data-in="17.5 in">445 mm</text>
+            <line class="dimline" x1="330" y1="48" x2="352" y2="48"/>
+            <line class="dimline" x1="330" y1="265" x2="352" y2="265"/>
+            <line class="dimline" x1="347" y1="48" x2="347" y2="265"/>
+            <text x="357" y="161" data-mm="361 mm" data-in="14.2 in">361 mm</text>
+            <text x="60" y="292" style="letter-spacing:.08em">TOP — LABEL FACE TO SKY</text>
+            <!-- ground -->
+            <line class="dimline" x1="40" y1="432" x2="600" y2="432"/>
+            <line class="dimline" x1="70" y1="432" x2="62" y2="441"/>
+            <line class="dimline" x1="170" y1="432" x2="162" y2="441"/>
+            <line class="dimline" x1="270" y1="432" x2="262" y2="441"/>
+            <line class="dimline" x1="370" y1="432" x2="362" y2="441"/>
+            <line class="dimline" x1="470" y1="432" x2="462" y2="441"/>
+            <line class="dimline" x1="570" y1="432" x2="562" y2="441"/>
+            <!-- side view, lying flat -->
+            <rect class="body" x="60" y="321" width="267" height="109" rx="8"/>
+            <line class="detail" x1="63" y1="359" x2="324" y2="359"/>
+            <rect class="detail" x="136" y="352" width="26" height="12" rx="2"/>
+            <rect class="detail" x="225" y="352" width="26" height="12" rx="2"/>
+            <line class="hiline" x1="330" y1="321" x2="352" y2="321"/>
+            <line class="hiline" x1="330" y1="430" x2="352" y2="430"/>
+            <line class="hiline" x1="347" y1="321" x2="347" y2="430"/>
+            <text class="hi" x="357" y="372" data-mm="182 mm" data-in="7.2 in">182 mm</text>
+            <text class="hi" x="357" y="387">mid-shin</text>
+            <text x="60" y="457" style="letter-spacing:.08em">SIDE — DEPLOYED</text>
+            <!-- carry-on ghost -->
+            <rect class="ghost" x="400" y="100" width="210" height="330" rx="14"/>
+            <line class="ghost" x1="452" y1="100" x2="452" y2="86"/>
+            <line class="ghost" x1="558" y1="100" x2="558" y2="86"/>
+            <line class="ghost" x1="446" y1="86" x2="564" y2="86"/>
+            <text x="400" y="74" data-mm="carry-on · 550 mm" data-in="carry-on · 21.7 in">carry-on · 550 mm</text>
+          </svg>
+          <figcaption class="figcap"><b>Fig. 02b</b> — Drawn to scale beside a standard carry-on. Lying flat it stands 182 mm — mid-shin — label face to the sky. Tap the units button to convert.</figcaption>
+        </figure>
+      </div>
     </div>
   </div>
 </section>
@@ -269,15 +348,26 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
           <li>Charging or full? One glance says so — the case stays shut</li>
           <li>Watches its own temperature, cools itself when working hard, and sleeps for months between uses</li>
         </ul>
+        <div class="calc">
+          <div class="t">Runway calculator</div>
+          <div class="row">
+            <div class="lbl">Sustained draw<br><span id="calcW" style="color:var(--ink);font-size:15px;font-weight:600">25 W</span></div>
+            <div class="out" id="calcOut">13.8<small> h</small></div>
+          </div>
+          <input type="range" id="calcSlider" min="12" max="40" step="1" value="25" aria-label="Sustained power draw in watts">
+          <div class="ticks"><span>15 W idle</span><span>~25 W typical</span><span>38 W peak</span></div>
+          <p class="fine">Straight math, no marketing: 30 Ah × 12.8 V LiFePO₄ = 384 Wh, 90% counted as usable. The "12+ hours" claim is this curve at a hard ~29 W. Solar edition with a 100 W panel in usable daylight runs net-positive — indefinitely.</p>
+        </div>
       </div>
       <figure class="oled-fig">
-        <div class="oled" style="max-width:250px">
-          <div class="chg">⚡ CHARGING</div>
-          <div class="big" id="socNum">87<span style="font-size:26px">%</span></div>
-          <div class="cap">Battery Level</div>
-          <div class="row2"><div><div class="k" id="cycK">Time Remaining</div><div class="v" id="cycV">11.5 h</div></div></div>
+        <div class="oledpx" style="max-width:290px">
+          <canvas id="oledCanvas" width="128" height="64" aria-label="Working replica of the SatPack Go side-panel display"></canvas>
         </div>
-        <figcaption class="figcap" style="max-width:250px"><b>Fig. 03</b> — The side-panel display, shown ~2× actual size (the real screen is under an inch across). It tells you the two things that matter: charging state and battery level — and cycles between time remaining and inside temperature.</figcaption>
+        <div class="peek-row" style="max-width:290px">
+          <button class="peek-btn" id="peekBtn" type="button">PEEK</button>
+          <span class="peek-note">the side-panel button, simulated</span>
+        </div>
+        <figcaption class="figcap" style="max-width:290px;margin-top:12px"><b>Fig. 03</b> — Not a mockup: a working replica of the display, drawn the way the firmware draws it, pixel for pixel (the real screen is under an inch across). Press PEEK to cycle the readout, same as the button on the case.</figcaption>
       </figure>
     </div>
   </div>
@@ -419,16 +509,103 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
 </footer>
 
 <script>
-// subtle live readout — the only motion on the page (cycles like the real display)
-const cycK = document.getElementById('cycK'), cycV = document.getElementById('cycV');
-let flip = false;
-if (cycK) setInterval(() => {
-  flip = !flip;
-  cycK.textContent = flip ? 'Inside Temp' : 'Time Remaining';
-  cycV.textContent = flip ? '21 \u00B0C' : '11.5 h';
-}, 3000);
+// ---------- OLED replica: 5x7 pixel font, drawn the way the firmware draws it ----------
+const FONT = {
+  ' ': ["00000","00000","00000","00000","00000","00000","00000"],
+  '0': ["01110","10001","10011","10101","11001","10001","01110"],
+  '1': ["00100","01100","00100","00100","00100","00100","01110"],
+  '2': ["01110","10001","00001","00010","00100","01000","11111"],
+  '3': ["11111","00010","00100","00010","00001","10001","01110"],
+  '4': ["00010","00110","01010","10010","11111","00010","00010"],
+  '5': ["11111","10000","11110","00001","00001","10001","01110"],
+  '6': ["00110","01000","10000","11110","10001","10001","01110"],
+  '7': ["11111","00001","00010","00100","01000","01000","01000"],
+  '8': ["01110","10001","10001","01110","10001","10001","01110"],
+  '9': ["01110","10001","10001","01111","00001","00010","01100"],
+  '%': ["11001","11001","00010","00100","01000","10011","10011"],
+  '.': ["00000","00000","00000","00000","00000","01100","01100"],
+  '\u00B0': ["01100","10010","01100","00000","00000","00000","00000"],
+  'A': ["01110","10001","10001","11111","10001","10001","10001"],
+  'B': ["11110","10001","10001","11110","10001","10001","11110"],
+  'C': ["01110","10001","10000","10000","10000","10001","01110"],
+  'D': ["11110","10001","10001","10001","10001","10001","11110"],
+  'E': ["11111","10000","10000","11110","10000","10000","11111"],
+  'F': ["11111","10000","10000","11110","10000","10000","10000"],
+  'G': ["01110","10001","10000","10111","10001","10001","01111"],
+  'H': ["10001","10001","10001","11111","10001","10001","10001"],
+  'I': ["01110","00100","00100","00100","00100","00100","01110"],
+  'L': ["10000","10000","10000","10000","10000","10000","11111"],
+  'M': ["10001","11011","10101","10101","10001","10001","10001"],
+  'N': ["10001","11001","10101","10011","10001","10001","10001"],
+  'P': ["11110","10001","10001","11110","10000","10000","10000"],
+  'R': ["11110","10001","10001","11110","10100","10010","10001"],
+  'S': ["01111","10000","10000","01110","00001","00001","11110"],
+  'T': ["11111","00100","00100","00100","00100","00100","00100"],
+  'V': ["10001","10001","10001","10001","10001","01010","00100"],
+  'Y': ["10001","10001","01010","00100","00100","00100","00100"],
+  'Z': ["00010","00100","01000","11110","00100","01000","10000"] // bolt glyph, firmware-style custom slot
+};
+const oled = document.getElementById('oledCanvas');
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (oled) {
+  const ctx = oled.getContext('2d');
+  let boltOn = true, screen = 0;
+  function otext(str, x, y, s, color) {
+    ctx.fillStyle = color;
+    for (let i = 0; i < str.length; i++) {
+      const g = FONT[str[i]]; if (!g) continue;
+      for (let r = 0; r < 7; r++) for (let c = 0; c < 5; c++)
+        if (g[r][c] === '1') ctx.fillRect(x + i*6*s + c*s, y + r*s, s, s);
+    }
+  }
+  function draw() {
+    ctx.fillStyle = '#05060a'; ctx.fillRect(0, 0, 128, 64);
+    if (boltOn || reduceMotion) otext('Z', 30, 4, 1, '#ffd75e');   // bolt blinks at 1 Hz, like the firmware
+    otext('CHARGING', 40, 4, 1, '#ffd75e');
+    ctx.fillStyle = '#1a1d26'; ctx.fillRect(0, 15, 128, 1);        // yellow/blue band split at row 16
+    otext('87%', 47, 21, 2, '#bfe3ff');
+    otext('BATTERY LEVEL', 26, 40, 1, '#51708a');
+    ctx.fillStyle = '#1a1d26'; ctx.fillRect(10, 50, 108, 1);
+    if (screen === 0) { otext('TIME LEFT', 6, 55, 1, '#51708a'); otext('11.5H', 93, 55, 1, '#bfe3ff'); }
+    else { otext('INSIDE TEMP', 6, 55, 1, '#51708a'); otext('21\u00B0C', 99, 55, 1, '#bfe3ff'); }
+  }
+  draw();
+  if (!reduceMotion) setInterval(() => { boltOn = !boltOn; draw(); }, 1000);
+  let cycle = setInterval(() => { screen ^= 1; draw(); }, 3000);
+  const peek = document.getElementById('peekBtn');
+  if (peek) peek.addEventListener('click', () => {
+    screen ^= 1; draw();
+    clearInterval(cycle);
+    cycle = setInterval(() => { screen ^= 1; draw(); }, 3000);
+  });
+}
+// ---------- runway calculator: straight Wh math ----------
+const calcSlider = document.getElementById('calcSlider');
+if (calcSlider) {
+  const USABLE_WH = 384 * 0.90;
+  const upd = () => {
+    const w = +calcSlider.value;
+    document.getElementById('calcW').textContent = w + ' W';
+    const h = USABLE_WH / w;
+    document.getElementById('calcOut').innerHTML =
+      (h >= 24 ? '24+' : h.toFixed(1)) + '<small> h</small>';
+  };
+  calcSlider.addEventListener('input', upd); upd();
+}
+// ---------- dimension drawing unit toggle ----------
+const unitBtn = document.getElementById('unitBtn');
+if (unitBtn) {
+  let inches = false;
+  unitBtn.addEventListener('click', () => {
+    inches = !inches;
+    document.querySelectorAll('.dim-fig svg text[data-mm]').forEach(t => {
+      t.textContent = inches ? t.dataset.in : t.dataset.mm;
+    });
+    unitBtn.textContent = inches ? 'in \u2192 mm' : 'mm \u2192 in';
+  });
+}
 // respect reduced-motion: hold the hero on its poster frame
-if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+if (reduceMotion) {
   document.querySelectorAll('video[autoplay]').forEach(v => { v.removeAttribute('autoplay'); v.pause(); });
 }
 </script>
