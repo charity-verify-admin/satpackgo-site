@@ -97,6 +97,7 @@ header.top{
 
 /* facts + product shot band under the hero */
 .sub-band{padding:44px 0 48px}
+.mast-photo.scene img{max-width:100%;border:1px solid var(--rule-2);filter:none}
 .sub-band .facts{grid-template-columns:1fr 1fr;margin-top:0}
 .sub-band .facts>div:nth-child(-n+2){border-bottom:1px solid var(--rule)}
 .sub-band .facts>div:nth-child(even){border-right:none}
@@ -118,6 +119,32 @@ header.top{
 .hero-cinema{margin:40px 0 0}
 .hero-cinema video,.hero-cinema img{width:100%;aspect-ratio:2.35/1;object-fit:cover;border:0;border-top:1px solid var(--rule-2);border-bottom:1px solid var(--rule-2)}
 @media(max-width:700px){.hero-cinema video,.hero-cinema img{aspect-ratio:16/10}}
+
+/* ---------- anatomy callouts ---------- */
+.ana{display:grid;grid-template-columns:230px 1fr 250px;gap:26px;align-items:center;position:relative}
+.ana-fig{position:relative;margin:0;max-width:520px;justify-self:center;width:100%}
+.ana-fig img{border:none;width:100%;display:block}
+.ana-dot{position:absolute;width:13px;height:13px;margin:-6.5px 0 0 -6.5px;border-radius:50%;background:var(--org);border:2px solid #fff;box-shadow:0 0 0 1px var(--rule-2);z-index:2;transition:transform .12s}
+.ana-dot i{display:none}
+.ana-dot.on{transform:scale(1.5)}
+.ana-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:1}
+.ana-svg line{stroke:var(--rule-2);stroke-width:1.5}
+.ana-svg line.on{stroke:var(--org);stroke-width:2}
+.ana-label{position:relative;padding:12px 14px 12px 38px;border:1px solid var(--rule);background:var(--card);margin:12px 0;transition:border-color .12s}
+.ana-label.on{border-color:var(--org)}
+.ana-n{position:absolute;left:12px;top:13px;font-family:var(--mono);font-size:12px;font-weight:600;color:var(--org-ink)}
+.ana-label h4{font-size:14.5px;font-weight:600;letter-spacing:-.01em}
+.ana-label p{font-size:12.5px;color:var(--ink-2);line-height:1.5;margin-top:2px}
+@media(max-width:900px){
+  .ana{display:block}
+  .ana-svg{display:none}
+  .ana-fig{max-width:420px;margin:0 auto}
+  .ana-dot{width:20px;height:20px;margin:-10px 0 0 -10px}
+  .ana-dot i{display:block;font-style:normal;font-family:var(--mono);font-size:10.5px;font-weight:600;color:#fff;text-align:center;line-height:16px}
+  .ana-col{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+  .ana-col .ana-label{margin:6px 0}
+}
+@media(max-width:560px){.ana-col{grid-template-columns:1fr}}
 
 /* ---------- deploy steps ---------- */
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
@@ -251,11 +278,12 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
   <div class="wrap topbar">
     <a class="logo" href="#top"><img src="assets/logo.png" alt="SatPack Go"></a>
     <nav>
-      <a href="#deploy">01 Deploy</a>
-      <a href="#get">02 What You Get</a>
-      <a href="#readout">03 Readout</a>
-      <a href="#uses">04 Uses</a>
-      <a href="#editions">05 Editions</a>
+      <a href="#case">01 The Case</a>
+      <a href="#deploy">02 Deploy</a>
+      <a href="#get">03 What You Get</a>
+      <a href="#readout">04 Readout</a>
+      <a href="#uses">05 Uses</a>
+      <a href="#editions">06 Editions</a>
       <a href="departments.html">Departments</a>
     </nav>
     <a class="btn solid" href="#order">Order / Quote</a>
@@ -290,16 +318,45 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
       <div><div class="k">Setup</div><div class="v">~3 min, no tools</div></div>
       <div><div class="k">Cell coverage needed</div><div class="v">None</div></div>
     </div>
-    <figure class="mast-photo">
-      <img src="assets/photos/real_34side.png" alt="SatPack Go case — side panel with power switch, battery readout, and DC input">
+    <figure class="mast-photo scene">
+      <img src="assets/photos/rain_lot.jpg" alt="SatPack Go case working in a rainstorm between RVs on a muddy production lot">
     </figure>
   </div>
 </div>
 
-<!-- ================= 01 DEPLOY ================= -->
+<!-- ================= 01 THE CASE (interactive callouts) ================= -->
+<section id="case">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">01</span><h2>Everything in one case.</h2><span class="sub">Hardware</span></div>
+    <div class="ana" id="ana">
+      <div class="ana-col">
+        <div class="ana-label" data-a="starlink"><span class="ana-n">1</span><h4>Integrated Starlink Mini</h4><p>Lives under the cover and works right through it. Lay the case label-up.</p></div>
+        <div class="ana-label" data-a="inside"><span class="ana-n">2</span><h4>Battery + Wi-Fi inside</h4><p>30 Ah battery and a Wi-Fi access point. 12+ hours per charge.</p></div>
+      </div>
+      <figure class="ana-fig">
+        <img src="assets/photos/real_34side.png" alt="SatPack Go case, three-quarter view showing the cover and the side control panel" id="anaImg">
+        <span class="ana-dot" data-a="starlink" style="left:32%;top:36%"><i>1</i></span>
+        <span class="ana-dot" data-a="inside" style="left:58%;top:74%"><i>2</i></span>
+        <span class="ana-dot" data-a="charge" style="left:87%;top:36.5%"><i>3</i></span>
+        <span class="ana-dot" data-a="solar" style="left:89.5%;top:51%"><i>4</i></span>
+        <span class="ana-dot" data-a="readout" style="left:86%;top:56%"><i>5</i></span>
+        <span class="ana-dot" data-a="switch" style="left:90%;top:58%"><i>6</i></span>
+      </figure>
+      <div class="ana-col">
+        <div class="ana-label" data-a="charge"><span class="ana-n">3</span><h4>Charge port</h4><p>Recharge from any 120 V wall outlet.</p></div>
+        <div class="ana-label" data-a="solar"><span class="ana-n">4</span><h4>Solar power input</h4><p>Plug in the folding panel — Solar edition runs indefinitely.</p></div>
+        <div class="ana-label" data-a="readout"><span class="ana-n">5</span><h4>Battery readout</h4><p>Battery percent and hours remaining, on the outside.</p></div>
+        <div class="ana-label" data-a="switch"><span class="ana-n">6</span><h4>Power switch</h4><p>One flip. Online in about three minutes.</p></div>
+      </div>
+      <svg class="ana-svg" id="anaSvg" aria-hidden="true"></svg>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 02 DEPLOY ================= -->
 <section id="deploy">
   <div class="wrap">
-    <div class="sec-head"><span class="sec-num">01</span><h2>Online in minutes. Zero assembly.</h2><span class="sub">Field deployment</span></div>
+    <div class="sec-head"><span class="sec-num">02</span><h2>Online in minutes. Zero assembly.</h2><span class="sub">Field deployment</span></div>
     <div class="steps">
       <div class="step">
         <span class="n">T+0:00 · STEP 1</span>
@@ -323,7 +380,7 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
 <!-- ================= 02 WHAT YOU GET ================= -->
 <section id="get" style="padding-top:0">
   <div class="wrap">
-    <div class="sec-head"><span class="sec-num">02</span><h2>Real internet, not an SOS text.</h2><span class="sub">What you get</span></div>
+    <div class="sec-head"><span class="sec-num">03</span><h2>Real internet, not an SOS text.</h2><span class="sub">What you get</span></div>
     <div class="split">
       <ul class="get-list">
         <li><span class="gi">2.1</span><div><h4>Everyone online, at full speed</h4><p>Real internet for every phone and laptop with you — video calls, maps, banking. There's a Starlink Mini and Wi-Fi inside.</p></div></li>
@@ -406,7 +463,7 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
 <!-- ================= 03 READOUT ================= -->
 <section id="readout" class="readout">
   <div class="wrap">
-    <div class="sec-head"><span class="sec-num">03</span><h2>Know how much power you have left.</h2><span class="sub">Power readout</span></div>
+    <div class="sec-head"><span class="sec-num">04</span><h2>Know how much power you have left.</h2><span class="sub">Power readout</span></div>
     <div class="split">
       <div>
         <p style="color:var(--ink-2);max-width:480px;margin-bottom:10px">You shouldn't have to guess how much battery is left. The display tells you.</p>
@@ -443,7 +500,7 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
 <!-- ================= 04 USES ================= -->
 <section id="uses">
   <div class="wrap">
-    <div class="sec-head"><span class="sec-num">04</span><h2>One case. Four jobs.</h2><span class="sub">Who runs one</span></div>
+    <div class="sec-head"><span class="sec-num">05</span><h2>One case. Four jobs.</h2><span class="sub">Who runs one</span></div>
     <div class="uses">
       <div class="use">
         <img src="assets/generated/q_blackout2.jpg" alt="Neighbourhood blackout, one connected household" loading="lazy">
@@ -472,7 +529,7 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
 <!-- ================= 05 EDITIONS ================= -->
 <section id="editions" style="padding-top:0">
   <div class="wrap">
-    <div class="sec-head"><span class="sec-num">05</span><h2>Two editions.</h2><span class="sub">Configurations</span></div>
+    <div class="sec-head"><span class="sec-num">06</span><h2>Two editions.</h2><span class="sub">Configurations</span></div>
     <div class="eds">
       <div class="ed">
         <span class="et">Edition 01</span>
@@ -515,7 +572,7 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
 <!-- ================= 06 FIELD ================= -->
 <section id="field" style="padding-top:0">
   <div class="wrap">
-    <div class="sec-head"><span class="sec-num">06</span><h2>It's meant to live outside.</h2><span class="sub">Field notes</span></div>
+    <div class="sec-head"><span class="sec-num">07</span><h2>It's meant to live outside.</h2><span class="sub">Field notes</span></div>
     <div class="gal">
       <figure class="wide">
         <img src="assets/generated/q2_storm.jpg" alt="SatPack Go deployed on a tailgate above a valley during a night storm" loading="lazy">
@@ -544,7 +601,7 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
 <!-- ================= 07 PEACE OF MIND ================= -->
 <section id="ready" style="padding-top:0">
   <div class="wrap">
-    <div class="sec-head"><span class="sec-num">07</span><h2>When the grid goes down, set this down.</h2><span class="sub">Peace of mind</span></div>
+    <div class="sec-head"><span class="sec-num">08</span><h2>When the grid goes down, set this down.</h2><span class="sub">Peace of mind</span></div>
     <p class="lede" style="max-width:760px">Cell networks tend to go down in exactly the situations where you need them. This waits charged in a closet or a truck until that day, then gets everyone back online in a few minutes.</p>
     <figure class="hero-fig">
       <img src="assets/generated/q_evac_gpt.jpg" alt="Family waiting calmly at their SUV tailgate under wildfire smoke, SatPack Go case deployed flat on the gravel, connected" loading="lazy">
@@ -556,7 +613,7 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
 <!-- ================= 08 WHY IT EXISTS ================= -->
 <section id="why" style="padding-top:0">
   <div class="wrap">
-    <div class="sec-head"><span class="sec-num">08</span><h2>Why it exists.</h2><span class="sub">From the builder</span></div>
+    <div class="sec-head"><span class="sec-num">09</span><h2>Why it exists.</h2><span class="sub">From the builder</span></div>
     <p class="lede" style="max-width:640px">Cell towers fail exactly when you need them most. And the gear that's supposed to save you usually needs assembling, plugging in, and babying — in the rain, in the dark, in a hurry.</p>
     <p class="lede" style="max-width:640px;margin-top:18px">So I built the opposite: a case you set on the ground and switch on. The antenna works through the lid. The battery is inside. The readout is on the outside. <b>It just works.</b></p>
     <p class="figcap" style="margin-top:16px">— I build and test every unit myself in Calgary, and walk you through activation at delivery. Departments &amp; fleets: see the <a href="departments.html" style="color:var(--org-ink)">departmental page</a>.</p>
@@ -882,6 +939,54 @@ if (reduceMotion) {
     canvas.addEventListener('pointercancel', () => dragging = false);
     requestAnimationFrame(frame);
   }
+})();
+
+// ---------- anatomy callouts: leader lines + hover pairing ----------
+(function(){
+  const ana = document.getElementById('ana');
+  if (!ana) return;
+  const svg = document.getElementById('anaSvg');
+  const NS = 'http://www.w3.org/2000/svg';
+
+  function draw(){
+    if (getComputedStyle(svg).display === 'none') return;
+    const ar = ana.getBoundingClientRect();
+    svg.setAttribute('viewBox', '0 0 ' + ar.width + ' ' + ar.height);
+    svg.innerHTML = '';
+    ana.querySelectorAll('.ana-label').forEach(lb => {
+      const key = lb.dataset.a;
+      const dot = ana.querySelector('.ana-dot[data-a="' + key + '"]');
+      if (!dot) return;
+      const lr = lb.getBoundingClientRect(), dr = dot.getBoundingClientRect();
+      const dx = dr.left + dr.width/2 - ar.left, dy = dr.top + dr.height/2 - ar.top;
+      const labelLeftOfDot = (lr.left + lr.width/2) < (dr.left + dr.width/2);
+      const lx = (labelLeftOfDot ? lr.right : lr.left) - ar.left;
+      const ly = lr.top + lr.height/2 - ar.top;
+      const ln = document.createElementNS(NS, 'line');
+      ln.setAttribute('x1', lx); ln.setAttribute('y1', ly);
+      ln.setAttribute('x2', dx); ln.setAttribute('y2', dy);
+      ln.dataset.a = key;
+      svg.appendChild(ln);
+    });
+  }
+
+  function setOn(key, on){
+    ana.querySelectorAll('[data-a="' + key + '"]').forEach(el =>
+      el.classList.toggle('on', on));
+  }
+  ana.querySelectorAll('.ana-label, .ana-dot').forEach(el => {
+    el.addEventListener('mouseenter', () => setOn(el.dataset.a, true));
+    el.addEventListener('mouseleave', () => setOn(el.dataset.a, false));
+    el.addEventListener('click', () => {
+      const on = !el.classList.contains('on');
+      ana.querySelectorAll('.on').forEach(e => e.classList.remove('on'));
+      if (on) setOn(el.dataset.a, true);
+    });
+  });
+
+  const img = document.getElementById('anaImg');
+  if (img.complete) draw(); else img.addEventListener('load', draw);
+  window.addEventListener('resize', draw);
 })();
 </script>
 </body>
