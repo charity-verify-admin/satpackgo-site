@@ -183,10 +183,11 @@ header.top{
 /* ---------- pixel OLED replica ---------- */
 .oledpx{background:#07080c;border:1px solid #232634;border-radius:6px;padding:14px;box-shadow:inset 0 0 40px rgba(0,0,0,.55)}
 .oledpx canvas{width:100%;display:block;image-rendering:pixelated}
-.peek-row{display:flex;align-items:center;gap:12px;margin-top:12px}
-.peek-btn{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.12em;color:var(--ink-2);background:var(--card);border:1px solid var(--rule-2);border-radius:999px;padding:8px 18px;cursor:pointer}
-.peek-btn:active{transform:translateY(1px)}
-.peek-note{font-family:var(--mono);font-size:10.5px;color:var(--ink-3)}
+.oled-row{display:flex;align-items:center;gap:22px}
+.press-btn{border:none;background:none;padding:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px}
+.press-btn img{height:80px;width:auto;display:block;border:none;filter:drop-shadow(0 3px 6px rgba(20,22,26,.3));transition:transform .08s}
+.press-btn:active img{transform:scale(.93)}
+.try-note{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.1em}
 
 /* ---------- runway calculator ---------- */
 .calc{margin-top:28px;border:1px solid var(--rule-2);padding:18px 18px 14px;background:var(--card)}
@@ -382,39 +383,19 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
     <div class="sec-head"><span class="sec-num">03</span><h2>Real internet, not an SOS text.</h2><span class="sub">What you get</span></div>
     <div class="split">
       <ul class="get-list">
-        <li><span class="gi">2.1</span><div><h4>Everyone online, at full speed</h4><p>Real internet for every phone and laptop with you — video calls, maps, banking. There's a Starlink Mini and Wi-Fi inside.</p></div></li>
-        <li><span class="gi">2.2</span><div><h4>12+ hours from one charge</h4><p>At least 12 hours on the built-in battery, or indefinitely with a solar panel. Recharges from any wall outlet.</p></div></li>
-        <li><span class="gi">2.3</span><div><h4>Know exactly where you stand</h4><p>The side display shows battery percent and hours remaining, so you always know where you stand.</p></div></li>
-        <li><span class="gi">2.4</span><div><h4>Ready the day it matters</h4><p>It can sit in a closet for months and still work in the rain the day you grab it.</p></div></li>
-        <li><span class="gi">2.5</span><div><h4>Grows with the job</h4><p>The Solar edition adds a folding panel. Wider Wi-Fi coverage for film sets and work camps is available on quote builds.</p></div></li>
-        <li><span class="gi">2.6</span><div><h4>Works on the move</h4><p>Strap it flat to a roof rack and it works while you drive — nothing to plug in. (In-motion use depends on your Starlink plan.)</p></div></li>
+        <li><span class="gi">3.1</span><div><h4>Everyone online, at full speed</h4><p>Real internet for every phone and laptop with you — video calls, maps, banking. There's a Starlink Mini and Wi-Fi inside.</p></div></li>
+        <li><span class="gi">3.2</span><div><h4>12+ hours from one charge</h4><p>At least 12 hours on the built-in battery, or indefinitely with a solar panel. Recharges from any wall outlet.</p></div></li>
+        <li><span class="gi">3.3</span><div><h4>Know exactly where you stand</h4><p>The side display shows battery percent and hours remaining, so you always know where you stand.</p></div></li>
+        <li><span class="gi">3.4</span><div><h4>Ready the day it matters</h4><p>It can sit in a closet for months and still work in the rain the day you grab it.</p></div></li>
+        <li><span class="gi">3.5</span><div><h4>Grows with the job</h4><p>The Solar edition adds a folding panel. Wider Wi-Fi coverage for film sets and work camps is available on quote builds.</p></div></li>
+        <li><span class="gi">3.6</span><div><h4>Works on the move</h4><p>Strap it flat to a roof rack and it works while you drive — nothing to plug in. (In-motion use depends on your Starlink plan.)</p></div></li>
       </ul>
       <div>
         <figure class="dim-photo">
           <div class="dim-wrap">
-          <img src="assets/photos/real_topangle_web.png" alt="SatPack Go case from above with its dimensions marked: 445 mm long, 361 mm wide, 182 mm deep">
-          <svg viewBox="0 0 998 1000" preserveAspectRatio="none" aria-hidden="true">
-            <!-- length 445 along the top back edge -->
-            <line class="dl" x1="278" y1="137" x2="898" y2="237"/>
-            <line class="dl" x1="270" y1="190" x2="280" y2="128"/>
-            <line class="dl" x1="890" y1="290" x2="900" y2="228"/>
-            <text x="588" y="152" text-anchor="middle" transform="rotate(9.2 588 152)">445 mm (17.5 in)</text>
-            <!-- width 361 along the right edge -->
-            <line class="dl" x1="825" y1="537" x2="935" y2="317"/>
-            <line class="dl" x1="780" y1="515" x2="833" y2="541"/>
-            <line class="dl" x1="890" y1="295" x2="943" y2="321"/>
-            <text x="912" y="452" text-anchor="middle" transform="rotate(-63.4 912 452)">361 mm (14.2 in)</text>
-            <!-- depth 182 down the left front corner -->
-            <line class="dl" x1="122" y1="465" x2="92" y2="760"/>
-            <line class="dl" x1="170" y1="470" x2="114" y2="464"/>
-            <line class="dl" x1="140" y1="765" x2="84" y2="759"/>
-            <text x="82" y="614" text-anchor="middle" transform="rotate(-84.2 82 614)">182 mm (7.2 in)</text>
-            <!-- weight -->
-            <text class="wk" x="975" y="905" text-anchor="end">WEIGHT</text>
-            <text x="975" y="941" text-anchor="end">6.2 lb (2.8 kg)</text>
-          </svg>
+          <img src="assets/photos/real_topangle_web.png" alt="SatPack Go case seen from above at an angle">
           </div>
-          <figcaption class="figcap"><b>Fig. 02</b> — Half the size of a carry-on. Light enough to carry one-handed.</figcaption>
+          <figcaption class="figcap"><b>Fig. 03</b> — Half the size of a carry-on. Light enough to carry one-handed. 445 × 361 × 182 mm (17.5 × 14.2 × 7.2 in) · 6.2 lb (2.8 kg).</figcaption>
         </figure>
       </div>
     </div>
@@ -447,26 +428,18 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
           <li>Tells you when it's charging and when it's full</li>
           <li>Runs its own fan when it gets warm, and sleeps between uses</li>
         </ul>
-        <div class="calc">
-          <div class="t">Runway calculator</div>
-          <div class="row">
-            <div class="lbl">Sustained draw<br><span id="calcW" style="color:var(--ink);font-size:15px;font-weight:600">25 W</span></div>
-            <div class="out" id="calcOut">13.8<small> h</small></div>
-          </div>
-          <input type="range" id="calcSlider" min="12" max="40" step="1" value="25" aria-label="Sustained power draw in watts">
-          <div class="ticks"><span>15 W idle</span><span>~25 W typical</span><span>38 W peak</span></div>
-          <p class="fine">Based on the built-in 30 Ah battery (384 Wh, 90% counted as usable). A steady 29 W runs just over 12 hours. The Solar edition with its 100 W panel keeps up with normal use in decent daylight.</p>
-        </div>
       </div>
       <figure class="oled-fig">
-        <div class="oledpx" style="max-width:290px">
-          <canvas id="oledCanvas" width="128" height="64" aria-label="Working replica of the SatPack Go side-panel display"></canvas>
+        <div class="oled-row">
+          <div class="oledpx" style="max-width:290px;flex:0 1 290px">
+            <canvas id="oledCanvas" width="128" height="64" aria-label="Working replica of the SatPack Go side-panel display"></canvas>
+          </div>
+          <button class="press-btn" id="peekBtn" type="button" aria-label="Press like the button on the case">
+            <img src="assets/photos/press_button.png" alt="">
+            <span class="try-note">try me</span>
+          </button>
         </div>
-        <div class="peek-row" style="max-width:290px">
-          <button class="peek-btn" id="peekBtn" type="button">PEEK</button>
-          <span class="peek-note">works like the button on the case</span>
-        </div>
-        <figcaption class="figcap" style="max-width:290px;margin-top:12px"><b>Fig. 03</b> — The display on the side of the case, shown about 3× actual size. It shows charging and battery level; the bottom row scrolls through time remaining, voltage, and the temperature inside the box. The button works like the real one.</figcaption>
+        <figcaption class="figcap" style="max-width:400px;margin-top:12px"><b>Fig. 04</b> — The display on the side of the case, shown about 3× actual size. It shows charging and battery level; the bottom row scrolls through time remaining, voltage, and the temperature inside the box.</figcaption>
       </figure>
     </div>
   </div>
@@ -766,19 +739,6 @@ if (oled) {
   }, 1000);
   const peek = document.getElementById('peekBtn');
   if (peek) peek.addEventListener('click', () => { screen = (screen + 1) % 3; dwell = 0; draw(); });
-}
-// ---------- runway calculator: straight Wh math ----------
-const calcSlider = document.getElementById('calcSlider');
-if (calcSlider) {
-  const USABLE_WH = 384 * 0.90;
-  const upd = () => {
-    const w = +calcSlider.value;
-    document.getElementById('calcW').textContent = w + ' W';
-    const h = USABLE_WH / w;
-    document.getElementById('calcOut').innerHTML =
-      (h >= 24 ? '24+' : h.toFixed(1)) + '<small> h</small>';
-  };
-  calcSlider.addEventListener('input', upd); upd();
 }
 // respect reduced-motion: hold the hero on its poster frame
 if (reduceMotion) {
