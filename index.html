@@ -204,8 +204,10 @@ header.top{
 .dim-wrap{position:relative}
 .dim-photo img{width:100%;display:block;border:1px solid var(--rule-2)}
 .dim-photo svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.dim-wrap{background:#fff;border:1px solid var(--rule-2)}
+.dim-wrap img{border:none}
 .dim-photo .dl{stroke:var(--org);stroke-width:2.5;opacity:.95}
-.dim-photo text{font-family:var(--mono);font-size:26px;font-weight:600;fill:#ff8c1f;paint-order:stroke;stroke:rgba(10,12,16,.72);stroke-width:5px;letter-spacing:.02em}
+.dim-photo text{font-family:var(--mono);font-size:26px;font-weight:600;fill:var(--ink);paint-order:stroke;stroke:rgba(255,255,255,.85);stroke-width:5px;letter-spacing:.02em}
 .dim-photo .wk{font-size:20px;letter-spacing:.14em}
 
 /* ---------- 3D case model ---------- */
@@ -316,7 +318,7 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
       <div><div class="k">Cell coverage needed</div><div class="v">None</div></div>
     </div>
     <figure class="mast-photo">
-      <img src="assets/photos/real_topangle_web.png" alt="SatPack Go case from above — cover label up, ready to set down">
+      <img src="assets/photos/real_front_web.png" alt="SatPack Go case, front face with the operate label: lay flat, this face to open sky">
     </figure>
   </div>
 </div>
@@ -390,26 +392,26 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
       <div>
         <figure class="dim-photo">
           <div class="dim-wrap">
-          <img src="assets/photos/dims_photo.jpg" alt="SatPack Go case standing on gravel with its dimensions marked: 445 mm long, 361 mm high, 182 mm deep">
-          <svg viewBox="0 0 1000 886" preserveAspectRatio="none" aria-hidden="true">
-            <!-- height 361 -->
-            <line class="dl" x1="100" y1="235" x2="100" y2="700"/>
-            <line class="dl" x1="88" y1="235" x2="168" y2="235"/>
-            <line class="dl" x1="88" y1="700" x2="192" y2="700"/>
-            <text transform="rotate(-90 82 468)" x="82" y="468" text-anchor="middle">361 mm (14.2 in)</text>
-            <!-- length 445, angled with the bottom edge -->
-            <line class="dl" x1="200" y1="760" x2="600" y2="782"/>
-            <line class="dl" x1="200" y1="708" x2="200" y2="772"/>
-            <line class="dl" x1="600" y1="730" x2="600" y2="794"/>
-            <text x="400" y="818" text-anchor="middle" transform="rotate(3.2 400 818)">445 mm (17.5 in)</text>
-            <!-- depth 182 -->
-            <line class="dl" x1="628" y1="762" x2="752" y2="702"/>
-            <line class="dl" x1="604" y1="724" x2="636" y2="774"/>
-            <line class="dl" x1="722" y1="646" x2="758" y2="712"/>
-            <text x="990" y="748" text-anchor="end">182 mm (7.2 in)</text>
+          <img src="assets/photos/real_topangle_web.png" alt="SatPack Go case from above with its dimensions marked: 445 mm long, 361 mm wide, 182 mm deep">
+          <svg viewBox="0 0 998 1000" preserveAspectRatio="none" aria-hidden="true">
+            <!-- length 445 along the top back edge -->
+            <line class="dl" x1="278" y1="137" x2="898" y2="237"/>
+            <line class="dl" x1="270" y1="190" x2="280" y2="128"/>
+            <line class="dl" x1="890" y1="290" x2="900" y2="228"/>
+            <text x="588" y="152" text-anchor="middle" transform="rotate(9.2 588 152)">445 mm (17.5 in)</text>
+            <!-- width 361 along the right edge -->
+            <line class="dl" x1="825" y1="537" x2="935" y2="317"/>
+            <line class="dl" x1="780" y1="515" x2="833" y2="541"/>
+            <line class="dl" x1="890" y1="295" x2="943" y2="321"/>
+            <text x="912" y="452" text-anchor="middle" transform="rotate(-63.4 912 452)">361 mm (14.2 in)</text>
+            <!-- depth 182 down the left front corner -->
+            <line class="dl" x1="122" y1="465" x2="92" y2="760"/>
+            <line class="dl" x1="170" y1="470" x2="114" y2="464"/>
+            <line class="dl" x1="140" y1="765" x2="84" y2="759"/>
+            <text x="82" y="614" text-anchor="middle" transform="rotate(-84.2 82 614)">182 mm (7.2 in)</text>
             <!-- weight -->
-            <text class="wk" x="978" y="80" text-anchor="end">WEIGHT</text>
-            <text x="978" y="116" text-anchor="end">6.2 lb (2.8 kg)</text>
+            <text class="wk" x="975" y="905" text-anchor="end">WEIGHT</text>
+            <text x="975" y="941" text-anchor="end">6.2 lb (2.8 kg)</text>
           </svg>
           </div>
           <figcaption class="figcap"><b>Fig. 02</b> — Half the size of a carry-on. Light enough to carry one-handed.</figcaption>
