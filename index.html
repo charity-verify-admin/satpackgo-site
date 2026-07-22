@@ -50,8 +50,8 @@ header.top{
   border-bottom:1px solid var(--rule);
 }
 .topbar{display:flex;align-items:center;gap:28px;height:60px}
-.logo{font-weight:700;font-size:17px;letter-spacing:.06em;color:var(--ink);text-decoration:none}
-.logo span{color:var(--org)}
+.logo{display:block;line-height:0}
+.logo img{height:20px;width:auto;display:block}
 .topbar nav{display:flex;gap:22px;margin-left:auto}
 .topbar nav a{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);text-decoration:none;letter-spacing:.04em}
 .topbar nav a:hover{color:var(--org-ink)}
@@ -75,6 +75,10 @@ header.top{
 .lede{font-size:18px;font-weight:300;color:var(--ink-2);max-width:600px;line-height:1.6}
 .lede b{font-weight:500;color:var(--ink)}
 .mast-ctas{display:flex;gap:12px;margin:30px 0 0;flex-wrap:wrap}
+.mast-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+.mast-photo{margin:0}
+.mast-photo img{width:100%;max-width:440px;display:block;margin:0 auto;border:none;filter:drop-shadow(0 22px 34px rgba(20,22,26,.22))}
+@media(max-width:860px){.mast-grid{grid-template-columns:1fr;gap:28px}.mast-photo img{max-width:320px}}
 
 /* key-facts row: datasheet style */
 .facts{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--rule-2);margin-top:44px;background:var(--card)}
@@ -224,7 +228,7 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
 
 <header class="top">
   <div class="wrap topbar">
-    <a class="logo" href="#top">SATPACK<span>·</span>GO</a>
+    <a class="logo" href="#top"><img src="assets/logo.png" alt="SatPack Go"></a>
     <nav>
       <a href="#deploy">01 Deploy</a>
       <a href="#get">02 What You Get</a>
@@ -239,14 +243,19 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
 
 <!-- ================= MASTHEAD (hybrid: cinematic first screen, datasheet after) ================= -->
 <div class="mast" id="top">
-  <div class="wrap">
-    <span class="kicker">Portable Internet Kit — Built in Calgary, Alberta</span>
-    <h1>Internet, anywhere you set it down.</h1>
-    <p class="lede">No towers. No outlet. No setup. <b>You never even open it.</b></p>
-    <div class="mast-ctas">
-      <a class="btn solid big" href="#order">Order — $2,495 CAD</a>
-      <a class="btn" href="#deploy">How it works</a>
+  <div class="wrap mast-grid">
+    <div>
+      <span class="kicker">Portable Internet Kit — Built in Calgary, Alberta</span>
+      <h1>Internet, anywhere you set it down.</h1>
+      <p class="lede">No towers. No outlet. No setup. <b>It just works.</b></p>
+      <div class="mast-ctas">
+        <a class="btn solid big" href="#order">Order — $2,495 CAD</a>
+        <a class="btn" href="#deploy">How it works</a>
+      </div>
     </div>
+    <figure class="mast-photo">
+      <img src="assets/photos/real_34side.png" alt="SatPack Go case — side panel with power switch, battery readout, and DC input">
+    </figure>
   </div>
   <figure class="hero-fig hero-cinema">
     <video autoplay muted loop playsinline preload="metadata" poster="assets/generated/hero_camp_poster.jpg" aria-label="SatPack Go set on a mountain boulder while a whole campsite works online behind it">
@@ -272,8 +281,8 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
     <div class="steps">
       <div class="step">
         <span class="n">T+0:00 · STEP 1</span>
-        <h3>Set it down. Keep it closed.</h3>
-        <p>Lay the case flat under open sky, label up. The antenna works through the closed lid, rain or snow.</p>
+        <h3>Set it down</h3>
+        <p>Lay the case flat under open sky, label up. The antenna works through the lid, rain or snow.</p>
       </div>
       <div class="step">
         <span class="n">T+0:30 · STEP 2</span>
@@ -305,7 +314,7 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
       <div>
         <figure>
           <img src="assets/photos/real_34side.png" alt="SatPack Go production unit showing the sealed side control panel: power switch, battery display, DC charge input" style="background:#fff;padding:24px">
-          <figcaption class="figcap"><b>Fig. 02</b> — The switch, the display, and the charge port are all on the outside. You never open the case, so weather doesn't matter.</figcaption>
+          <figcaption class="figcap"><b>Fig. 02</b> — The switch, the display, and the charge port are all on the outside, built for rain and snow.</figcaption>
         </figure>
         <figure class="dim-fig">
           <button class="unit-btn" id="unitBtn" type="button">mm → in</button>
@@ -527,7 +536,7 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
   <div class="wrap">
     <div class="sec-head"><span class="sec-num">08</span><h2>Why it exists.</h2><span class="sub">From the builder</span></div>
     <p class="lede" style="max-width:640px">Cell towers fail exactly when you need them most. And the gear that's supposed to save you usually needs assembling, plugging in, and babying — in the rain, in the dark, in a hurry.</p>
-    <p class="lede" style="max-width:640px;margin-top:18px">So I built the opposite: a case you set on the ground and switch on. The antenna works through the sealed lid. The battery is inside. The readout is on the outside. <b>You never even open it.</b></p>
+    <p class="lede" style="max-width:640px;margin-top:18px">So I built the opposite: a case you set on the ground and switch on. The antenna works through the lid. The battery is inside. The readout is on the outside. <b>It just works.</b></p>
     <p class="figcap" style="margin-top:16px">— I build and test every unit myself in Calgary, and walk you through activation at delivery. Departments &amp; fleets: see the <a href="departments.html" style="color:var(--org-ink)">departmental page</a>.</p>
   </div>
 </section>
@@ -555,7 +564,7 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
 
 <footer>
   <div class="wrap foot">
-    <span>SATPACK·GO — Self-Contained Satellite Internet System</span>
+    <span style="display:flex;align-items:center;gap:10px"><img src="assets/logo.png" alt="SatPack Go" style="height:13px;width:auto"> Self-Contained Satellite Internet System</span>
     <span>Manufactured by Genstate · Calgary, AB · Rev. 2026-07 · © 2026 Genstate</span>
   </div>
 </footer>
