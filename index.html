@@ -200,12 +200,12 @@ header.top{
 .calc .fine{font-size:11.5px;color:var(--ink-3);margin-top:12px;line-height:1.55;border-top:1px solid var(--rule);padding-top:10px}
 
 /* ---------- dimension drawing ---------- */
-.dim-photo{margin-top:28px}
+.dim-photo{margin-top:0}
 .dim-wrap{position:relative}
 .dim-photo img{width:100%;display:block;border:1px solid var(--rule-2)}
 .dim-photo svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.dim-photo .dl{stroke:#fff;stroke-width:2;opacity:.92}
-.dim-photo text{font-family:var(--mono);font-size:26px;font-weight:600;fill:#fff;paint-order:stroke;stroke:rgba(10,12,16,.6);stroke-width:5px;letter-spacing:.02em}
+.dim-photo .dl{stroke:var(--org);stroke-width:2.5;opacity:.95}
+.dim-photo text{font-family:var(--mono);font-size:26px;font-weight:600;fill:#ff8c1f;paint-order:stroke;stroke:rgba(10,12,16,.72);stroke-width:5px;letter-spacing:.02em}
 .dim-photo .wk{font-size:20px;letter-spacing:.14em}
 
 /* ---------- 3D case model ---------- */
@@ -388,10 +388,6 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
         <li><span class="gi">2.6</span><div><h4>Works on the move</h4><p>Strap it flat to a roof rack and it works while you drive — nothing to plug in. (In-motion use depends on your Starlink plan.)</p></div></li>
       </ul>
       <div>
-        <figure>
-          <img src="assets/photos/real_34side.png" alt="SatPack Go production unit showing the sealed side control panel: power switch, battery display, DC charge input" style="background:#fff;padding:24px">
-          <figcaption class="figcap"><b>Fig. 02</b> — The switch, the display, and the charge port are all on the outside, built for rain and snow.</figcaption>
-        </figure>
         <figure class="dim-photo">
           <div class="dim-wrap">
           <img src="assets/photos/dims_photo.jpg" alt="SatPack Go case standing on gravel with its dimensions marked: 445 mm long, 361 mm high, 182 mm deep">
@@ -401,11 +397,11 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
             <line class="dl" x1="88" y1="235" x2="168" y2="235"/>
             <line class="dl" x1="88" y1="700" x2="192" y2="700"/>
             <text transform="rotate(-90 82 468)" x="82" y="468" text-anchor="middle">361 mm (14.2 in)</text>
-            <!-- length 445 -->
-            <line class="dl" x1="200" y1="775" x2="600" y2="775"/>
-            <line class="dl" x1="200" y1="708" x2="200" y2="787"/>
-            <line class="dl" x1="600" y1="726" x2="600" y2="787"/>
-            <text x="400" y="822" text-anchor="middle">445 mm (17.5 in)</text>
+            <!-- length 445, angled with the bottom edge -->
+            <line class="dl" x1="200" y1="760" x2="600" y2="782"/>
+            <line class="dl" x1="200" y1="708" x2="200" y2="772"/>
+            <line class="dl" x1="600" y1="730" x2="600" y2="794"/>
+            <text x="400" y="818" text-anchor="middle" transform="rotate(3.2 400 818)">445 mm (17.5 in)</text>
             <!-- depth 182 -->
             <line class="dl" x1="628" y1="762" x2="752" y2="702"/>
             <line class="dl" x1="604" y1="724" x2="636" y2="774"/>
@@ -416,7 +412,7 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
             <text x="978" y="116" text-anchor="end">6.2 lb (2.8 kg)</text>
           </svg>
           </div>
-          <figcaption class="figcap"><b>Fig. 02b</b> — Half the size of a carry-on. Light enough to carry one-handed.</figcaption>
+          <figcaption class="figcap"><b>Fig. 02</b> — Half the size of a carry-on. Light enough to carry one-handed.</figcaption>
         </figure>
       </div>
     </div>
