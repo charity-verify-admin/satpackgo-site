@@ -200,16 +200,13 @@ header.top{
 .calc .fine{font-size:11.5px;color:var(--ink-3);margin-top:12px;line-height:1.55;border-top:1px solid var(--rule);padding-top:10px}
 
 /* ---------- dimension drawing ---------- */
-.dim-fig{margin-top:28px;position:relative}
-.dim-fig svg{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--rule-2)}
-.dim-fig svg text{font-family:var(--mono);font-size:11px;fill:#4a4a45}
-.dim-fig svg .dimline{stroke:#8a8a82;stroke-width:1}
-.dim-fig svg .body{stroke:#22221f;stroke-width:1.6;fill:none}
-.dim-fig svg .detail{stroke:#55554e;stroke-width:1;fill:none}
-.dim-fig svg .ghost{stroke:#b5b5ac;stroke-width:1.2;fill:none;stroke-dasharray:5 4}
-.dim-fig svg .hi{fill:#c25a00;font-weight:600}
-.dim-fig svg .hiline{stroke:#e8720c;stroke-width:1.2}
-.unit-btn{position:absolute;top:10px;right:10px;font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.08em;color:var(--ink-2);background:var(--paper,#fafaf7);border:1px solid var(--rule-2);border-radius:999px;padding:5px 12px;cursor:pointer}
+.dim-photo{margin-top:28px}
+.dim-wrap{position:relative}
+.dim-photo img{width:100%;display:block;border:1px solid var(--rule-2)}
+.dim-photo svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.dim-photo .dl{stroke:#fff;stroke-width:2;opacity:.92}
+.dim-photo text{font-family:var(--mono);font-size:26px;font-weight:600;fill:#fff;paint-order:stroke;stroke:rgba(10,12,16,.6);stroke-width:5px;letter-spacing:.02em}
+.dim-photo .wk{font-size:20px;letter-spacing:.14em}
 
 /* ---------- 3D case model ---------- */
 .model-fig{margin-top:28px}
@@ -395,51 +392,31 @@ footer{border-top:1px solid var(--rule);padding:28px 0;background:var(--paper)}
           <img src="assets/photos/real_34side.png" alt="SatPack Go production unit showing the sealed side control panel: power switch, battery display, DC charge input" style="background:#fff;padding:24px">
           <figcaption class="figcap"><b>Fig. 02</b> — The switch, the display, and the charge port are all on the outside, built for rain and snow.</figcaption>
         </figure>
-        <figure class="dim-fig">
-          <button class="unit-btn" id="unitBtn" type="button">mm → in</button>
-          <svg viewBox="0 0 620 470" role="img" aria-label="Dimensioned drawing of the SatPack Go case: top and side views to scale beside a carry-on suitcase">
-            <!-- top view -->
-            <rect class="body" x="60" y="48" width="267" height="217" rx="16"/>
-            <rect class="detail" x="73" y="61" width="241" height="191" rx="10"/>
-            <rect class="detail" x="136" y="259" width="26" height="10"/>
-            <rect class="detail" x="225" y="259" width="26" height="10"/>
-            <rect class="detail" x="327" y="127" width="9" height="62" rx="4"/>
-            <line class="dimline" x1="60" y1="46" x2="60" y2="28"/>
-            <line class="dimline" x1="327" y1="46" x2="327" y2="28"/>
-            <line class="dimline" x1="60" y1="33" x2="327" y2="33"/>
-            <text x="193" y="26" text-anchor="middle" data-mm="445 mm" data-in="17.5 in">445 mm</text>
-            <line class="dimline" x1="330" y1="48" x2="352" y2="48"/>
-            <line class="dimline" x1="330" y1="265" x2="352" y2="265"/>
-            <line class="dimline" x1="347" y1="48" x2="347" y2="265"/>
-            <text x="357" y="161" data-mm="361 mm" data-in="14.2 in">361 mm</text>
-            <text x="60" y="292" style="letter-spacing:.08em">TOP — LABEL FACE TO SKY</text>
-            <!-- ground -->
-            <line class="dimline" x1="40" y1="432" x2="600" y2="432"/>
-            <line class="dimline" x1="70" y1="432" x2="62" y2="441"/>
-            <line class="dimline" x1="170" y1="432" x2="162" y2="441"/>
-            <line class="dimline" x1="270" y1="432" x2="262" y2="441"/>
-            <line class="dimline" x1="370" y1="432" x2="362" y2="441"/>
-            <line class="dimline" x1="470" y1="432" x2="462" y2="441"/>
-            <line class="dimline" x1="570" y1="432" x2="562" y2="441"/>
-            <!-- side view, lying flat -->
-            <rect class="body" x="60" y="321" width="267" height="109" rx="8"/>
-            <line class="detail" x1="63" y1="359" x2="324" y2="359"/>
-            <rect class="detail" x="136" y="352" width="26" height="12" rx="2"/>
-            <rect class="detail" x="225" y="352" width="26" height="12" rx="2"/>
-            <line class="hiline" x1="330" y1="321" x2="352" y2="321"/>
-            <line class="hiline" x1="330" y1="430" x2="352" y2="430"/>
-            <line class="hiline" x1="347" y1="321" x2="347" y2="430"/>
-            <text class="hi" x="357" y="372" data-mm="182 mm" data-in="7.2 in">182 mm</text>
-            <text class="hi" x="357" y="387">mid-shin</text>
-            <text x="60" y="457" style="letter-spacing:.08em">SIDE — DEPLOYED</text>
-            <!-- carry-on ghost -->
-            <rect class="ghost" x="400" y="100" width="210" height="330" rx="14"/>
-            <line class="ghost" x1="452" y1="100" x2="452" y2="86"/>
-            <line class="ghost" x1="558" y1="100" x2="558" y2="86"/>
-            <line class="ghost" x1="446" y1="86" x2="564" y2="86"/>
-            <text x="400" y="74" data-mm="carry-on · 550 mm" data-in="carry-on · 21.7 in">carry-on · 550 mm</text>
+        <figure class="dim-photo">
+          <div class="dim-wrap">
+          <img src="assets/photos/dims_photo.jpg" alt="SatPack Go case standing on gravel with its dimensions marked: 445 mm long, 361 mm high, 182 mm deep">
+          <svg viewBox="0 0 1000 886" preserveAspectRatio="none" aria-hidden="true">
+            <!-- height 361 -->
+            <line class="dl" x1="100" y1="235" x2="100" y2="700"/>
+            <line class="dl" x1="88" y1="235" x2="168" y2="235"/>
+            <line class="dl" x1="88" y1="700" x2="192" y2="700"/>
+            <text transform="rotate(-90 82 468)" x="82" y="468" text-anchor="middle">361 mm (14.2 in)</text>
+            <!-- length 445 -->
+            <line class="dl" x1="200" y1="775" x2="600" y2="775"/>
+            <line class="dl" x1="200" y1="708" x2="200" y2="787"/>
+            <line class="dl" x1="600" y1="726" x2="600" y2="787"/>
+            <text x="400" y="822" text-anchor="middle">445 mm (17.5 in)</text>
+            <!-- depth 182 -->
+            <line class="dl" x1="628" y1="762" x2="752" y2="702"/>
+            <line class="dl" x1="604" y1="724" x2="636" y2="774"/>
+            <line class="dl" x1="722" y1="646" x2="758" y2="712"/>
+            <text x="990" y="748" text-anchor="end">182 mm (7.2 in)</text>
+            <!-- weight -->
+            <text class="wk" x="978" y="80" text-anchor="end">WEIGHT</text>
+            <text x="978" y="116" text-anchor="end">6.2 lb (2.8 kg)</text>
           </svg>
-          <figcaption class="figcap"><b>Fig. 02b</b> — To scale beside a carry-on. Lying flat it's 182 mm tall, about mid-shin. Tap the button for inches.</figcaption>
+          </div>
+          <figcaption class="figcap"><b>Fig. 02b</b> — Half the size of a carry-on. Light enough to carry one-handed.</figcaption>
         </figure>
       </div>
     </div>
@@ -804,18 +781,6 @@ if (calcSlider) {
       (h >= 24 ? '24+' : h.toFixed(1)) + '<small> h</small>';
   };
   calcSlider.addEventListener('input', upd); upd();
-}
-// ---------- dimension drawing unit toggle ----------
-const unitBtn = document.getElementById('unitBtn');
-if (unitBtn) {
-  let inches = false;
-  unitBtn.addEventListener('click', () => {
-    inches = !inches;
-    document.querySelectorAll('.dim-fig svg text[data-mm]').forEach(t => {
-      t.textContent = inches ? t.dataset.in : t.dataset.mm;
-    });
-    unitBtn.textContent = inches ? 'in \u2192 mm' : 'mm \u2192 in';
-  });
 }
 // respect reduced-motion: hold the hero on its poster frame
 if (reduceMotion) {
